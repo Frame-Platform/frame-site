@@ -11,20 +11,48 @@ export default defineConfig({
         {
           icon: "github",
           label: "GitHub",
-          href: "https://github.com/withastro/starlight",
+          href: "https://github.com/UntitledCapstoneProj",
         },
       ],
       sidebar: [
         {
-          label: "Guides",
+          label: "Case Study",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "Example Guide", slug: "guides/example" },
+            { label: "Introduction", slug: "case-study/introduction" },
+            { label: "Background", slug: "case-study/background" },
+            {
+              label: "Existing Solutions",
+              slug: "case-study/existing-solutions",
+            },
+            {
+              label: "Architecture Overview",
+              slug: "case-study/architecture-overview",
+            },
+            {
+              label: "Design Decisions & Tradeoffs",
+              slug: "case-study/design-decisions",
+            },
+            {
+              label: "Conclusion",
+              slug: "case-study/conclusion",
+            },
+            {
+              label: "Future Work",
+              slug: "case-study/future-work",
+            },
+            {
+              label: "References",
+              slug: "case-study/references",
+            },
           ],
         },
         {
-          label: "Reference",
-          autogenerate: { directory: "reference" },
+          label: "Documentation",
+          items: [
+            { label: "Deploying Frame", slug: "documentation/deployment" },
+            { label: "Using the Frame SDK", slug: "documentation/sdk" },
+          ],
         },
       ],
     }),
