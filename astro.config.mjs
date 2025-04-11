@@ -6,7 +6,7 @@ import starlight from "@astrojs/starlight";
 export default defineConfig({
   integrations: [
     starlight({
-      title: "Home",
+      title: "Frame",
       social: [
         {
           icon: "github",
@@ -51,7 +51,10 @@ export default defineConfig({
           label: "Documentation",
           items: [
             { label: "Deploying Frame", slug: "documentation/deployment" },
-            { label: "Using the Frame SDK", slug: "documentation/sdk" },
+            {
+              label: "Using the Frame SDK",
+              slug: "documentation/sdk",
+            },
           ],
         },
       ],
