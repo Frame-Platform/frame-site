@@ -1,6 +1,6 @@
 ---
 title: Deploying Frame
-description: A guide in my new Starlight docs site.
+description: A guide for deploying Frame onto your AWS account
 ---
 
 Frame deploys several key components in your AWS account using AWS CDK (Cloud Development Kit).

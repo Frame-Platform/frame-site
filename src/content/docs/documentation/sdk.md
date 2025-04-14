@@ -15,7 +15,7 @@ In Frame, a "document" represents a unit of data that gets embedded and stored i
 
 - A combination of both text and image (e.g., an image with a caption)
 
-We developed Frame to be flexible in this regard, to allow developer to use our platform however it suits their embedding needs.
+We developed Frame to be flexible in this regard, to allow developers to use our platform however it suits their embedding needs.
 
 ## Installation
 
