@@ -7,6 +7,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Frame",
+      customCss: ["./src/styles/global.css"],
       logo: {
         src: "./src/assets/frame-logo.svg",
       },
