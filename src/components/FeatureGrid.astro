@@ -1,0 +1,44 @@
+---
+import {Icon} from '@astrojs/starlight/components';
+import { CardGrid } from '@astrojs/starlight/components';
+import { Card } from '@astrojs/starlight/components';
+---
+
+<style>
+  .feature-grid {
+    text-align: center;
+    padding: 4rem 1rem;
+    max-width: 60rem;
+    margin: 0 auto;
+  }
+
+  .feature-grid p {
+    margin: 0 auto 3rem;
+    font-size: 1rem;
+    color: var(--sl-color-text-secondary);
+  }
+</style>
+
+<section class="feature-grid">
+  <h1>From Raw Images to Intuitive Search</h1>
+  <p>
+    Frame simplifies the entire process of turning raw data into searchable insights.
+    From seamless ingestion and powerful embedding to efficient storage and quick query responses,
+    Frame’s got everything you need to supercharge your search components.
+  </p>
+
+  <CardGrid>
+    <Card title="Ingestion" icon="add-document">
+      Interesting content you want to highlight.
+    </Card>
+    <Card title="Embedding" icon="seti:html">
+      More information you want to share.
+    </Card>
+    <Card title="Storage" icon="open-book">
+      Interesting content you want to highlight.
+    </Card>
+    <Card title="Query" icon="magnifier">
+      Interesting content you want to highlight.
+    </Card>
+  </CardGrid>
+</section>
