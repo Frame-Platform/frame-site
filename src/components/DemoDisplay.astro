@@ -1,0 +1,99 @@
+---
+---
+
+<style>
+  .feature-showcase {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 1rem;
+  }
+
+  .feature-showcase h1 {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .feature-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .feature-row.reverse {
+    direction: rtl;
+  }
+
+  .feature-row.reverse .feature-content {
+    direction: ltr;
+  }
+
+  .feature-image img {
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid var(--sl-color-hairline-shade);
+    border-radius: 0.5rem;
+    box-shadow: 0 3px 7px rgba(173, 180, 206, 0.05), 0 10px 20px rgba(166,173,201,.2);
+  }
+
+  .feature-content h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .feature-row,
+    .feature-row.reverse {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-row.reverse {
+      direction: ltr;
+    }
+  }
+</style>
+
+<section class="feature-showcase">
+  <h1>Find What You’re Really Looking For</h1>
+
+  <!-- 1. Left Image / Right Text -->
+  <div class="feature-row">
+    <div class="feature-image">
+      <img src="/assets/monkey1.gif" alt="Natural Language Search" />
+    </div>
+    <div class="feature-content">
+      <h3>Query with Natural Language</h3>
+      <p>
+        Watch as Frame transforms natural language into precise visual results — powered by real-time vector embeddings and our lightweight, self-hosted architecture.
+      </p>
+    </div>
+  </div>
+
+  <!-- 2. Right Image / Left Text -->
+  <div class="feature-row reverse">
+    <div class="feature-image">
+      <img src="/assets/monkey2.gif" alt="Reverse Image Search" />
+    </div>
+    <div class="feature-content">
+      <h3>Reverse Image Search</h3>
+      <p>
+        Upload a photo to uncover visually and semantically similar results — whether it’s near-duplicates, related styles, or thematically linked content.
+      </p>
+    </div>
+  </div>
+
+  <!-- 3. Left Image / Right Text -->
+  <div class="feature-row">
+    <div class="feature-image">
+      <img src="/assets/monkey3.gif" alt="Smart Recommendations" />
+    </div>
+    <div class="feature-content">
+      <h3>Smart Recommendations</h3>
+      <p>
+        Whether you’re exploring artwork, researching topics, or browsing product catalogs, Frame helps surface “more like this” results that actually feel relevant.
+      </p>
+    </div>
+  </div>
+</section>

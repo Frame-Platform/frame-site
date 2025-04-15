@@ -1,0 +1,50 @@
+---
+import { User } from 'studiocms:ui/components';
+import { Card } from 'studiocms:ui/components';
+const team = [
+  {
+    name: "Chase Philpot",
+    img: "/assets/team-jordan.jpg",
+  },
+  {
+    name: "Liam Turner",
+    img: "/assets/team-taylor.jpg",
+  },
+  {
+    name: "Mykel Murphy",
+    img: "/assets/team-sam.jpg",
+  },
+  {
+    name: "Ralph Delia",
+    img: "/assets/team-casey.jpg",
+  },
+];
+---
+
+<style>
+.team-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.team-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+}
+</style>
+
+<section class="team-section">
+  <h2>Our Team</h2>
+  <div class="team-grid">
+    <User name="Chase Philpot" loading="eager" description="A cool dude"/>
+    <User name="Liam Turner" loading="eager" description="A cool dude"/>
+    <User name="Mykel Murphy" loading="eager" description="A cool dude"/>
+    <User name="Ralph Delia" loading="eager" description="A cool dude"/>
+    <!-- {team.map(({ name }) => (
+      <User name={name} loading='eager' description='A cool dude' />
+    ))} -->
+  </div>
+</section>

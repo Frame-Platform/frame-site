@@ -3,15 +3,34 @@ title: Home
 description: Home page
 template: splash
 hero:
-  tagline: An easy, out-of-the-box robust image search platform, including both image vector embedding search and recommendation
+  title: Frame
+  tagline: Build sophisticated image search without the complexity of vector embeddings, databases, and infrastructure.
   image:
-    file: ../../assets/frame-logo.svg
+    alt: A glittering, brightly colored logo
+    file: "../../assets/frame-logo.svg"
   actions:
     - text: Case Study
       link: /case-study/introduction
       icon: right-arrow
-    - text: Read the Documentation
+    - text: Documentation
       link: /documentation/deployment
-      icon: external
+      icon: right-arrow
       variant: minimal
+      attrs:
+        rel: me
 ---
+
+import FeatureGrid from "../../components/FeatureGrid.astro";
+import DemoDisplay from "../../components/DemoDisplay.astro";
+import DevHighlight from "../../components/DevHighlight.astro";
+import OurTeam from "../../components/OurTeam.astro";
+import { Divider } from "studiocms:ui/components";
+
+<Divider />
+<FeatureGrid />
+<Divider />
+<DemoDisplay />
+<Divider />
+<DevHighlight />
+<Divider />
+<OurTeam />
