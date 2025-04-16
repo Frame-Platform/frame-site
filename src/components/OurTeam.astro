@@ -1,22 +1,27 @@
 ---
-import { User } from 'studiocms:ui/components';
-import { Card } from 'studiocms:ui/components';
+import { Icon } from "@astrojs/starlight/components"
+
 const team = [
   {
     name: "Chase Philpot",
-    img: "/assets/team-jordan.jpg",
+    img: "/assets/chase.jpeg",
+    location: "Hartford, CT"
   },
   {
     name: "Liam Turner",
-    img: "/assets/team-taylor.jpg",
+    img: "/assets/liam.jpeg",
+    location: "Yorkshire, UK"
   },
   {
     name: "Mykel Murphy",
-    img: "/assets/team-sam.jpg",
+    img: "/assets/mykel.png",
+    location: "Gainesville, FL",
+    github: "https://github.com/mykelkyle"
   },
   {
     name: "Ralph Delia",
-    img: "/assets/team-casey.jpg",
+    img: "/assets/ralph.jpeg",
+    location: "New York, NY"
   },
 ];
 ---
@@ -26,25 +31,62 @@ const team = [
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-content: center;
   justify-content: center;
+  gap: 2rem;
 }
+
 .team-grid {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.team-member {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 4rem;
+  width: 230px;
+  height: 320px; /* 🔒 lock height */
+  padding: 1rem;
+  box-sizing: border-box;
+  box-shadow: 3px 3px 5px 0px rgba(20, 20, 20, 0.75);
+  border-radius: 10px;
+}
+
+img {
+  padding: 0;
+  margin: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;              /* makes it a perfect circle */
+  object-fit: cover;               /* crops and centers the image */
+  border: 2px solid var(--sl-color-hairline-shade);  /* optional border */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);         /* optional soft shadow */
+  background-color: var(--sl-color-bg);              /* fallback bg color */
+}
+
+.links {
+  display: flex;
 }
 </style>
 
-<section class="team-section">
-  <h2>Our Team</h2>
+<section class="team-section" id="our-team">
+  <h2>Meet The Team</h2>
   <div class="team-grid">
-    <User name="Chase Philpot" loading="eager" description="A cool dude"/>
-    <User name="Liam Turner" loading="eager" description="A cool dude"/>
-    <User name="Mykel Murphy" loading="eager" description="A cool dude"/>
-    <User name="Ralph Delia" loading="eager" description="A cool dude"/>
-    <!-- {team.map(({ name }) => (
-      <User name={name} loading='eager' description='A cool dude' />
-    ))} -->
+    {team.map(({ name, img, location, github}) => (
+      <div class="team-member">
+        <img src={img} alt={`Photo of ${name}`} />
+        <h3>{name}</h3>
+        <p>{location}</p>
+        <div class="links">
+          <a href={github}><Icon name="seti:github" size="1.5rem"/></a>
+          <a><Icon name="linkedin" size="1.5rem"/></a>
+        </div>
+      </div>
+    ))}
   </div>
 </section>
