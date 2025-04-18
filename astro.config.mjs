@@ -13,8 +13,6 @@ export default defineConfig({
         src: "./src/assets/frame-logo.svg",
       },
       components: {
-        Footer: "./src/components/Footer.astro",
-        Header: "./src/components/Header.astro",
         MobileMenuFooter: "./src/components/MobileMenuFooter.astro",
       },
       social: [
