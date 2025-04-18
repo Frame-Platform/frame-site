@@ -1,0 +1,17 @@
+---
+// components/CardGrid.astro
+const { children } = Astro.slots;
+---
+
+<div class="card-grid">
+  <slot />
+</div>
+
+<style>
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+</style>

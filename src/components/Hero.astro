@@ -1,0 +1,131 @@
+---
+// Hero.astro
+---
+
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-text">
+      <h1>Ingest Anything.<br />Query Everything.</h1>
+      <p>
+        Build sophisticated image search without the complexity of vector embeddings, databases, and infrastructure.
+      </p>
+      <div class="hero-buttons">
+        <a class="primary-btn" href="/case-study/introduction">Case Study →</a>
+        <a class="secondary-btn" href="/documentation/deployment">Documentation →</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="/favicon.svg" alt="Frame logo" />
+    </div>
+  </div>
+</section>
+
+<style>
+.hero {
+  background: linear-gradient(to bottom, #17181c 0%, #202124 60%, #0f0f11);
+  color: var(--sl-color-white);
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 0;
+  top: 0;
+  left: 0;
+}
+
+.hero-container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.hero-text {
+  flex: 1 1 500px;
+}
+
+.hero-text h1 {
+  font-size: var(--font-xxl, 3rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--sl-color-white);
+}
+
+.hero-text p {
+  font-size: var(--text-lg, 1.125rem);
+  color: var(--sl-color-gray-2);
+  max-width: 500px;
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.primary-btn {
+  background-color: var(--sl-color-accent-high);
+  color: var(--sl-color-black);
+}
+
+.primary-btn:hover {
+  background-color: var(--sl-color-white);
+  color: #0d0d0f
+}
+
+.secondary-btn {
+  background: transparent;
+  color: var(--sl-color-accent-high);
+  border: 1px solid var(--sl-color-accent-high);
+}
+
+.secondary-btn:hover {
+  background: var(--sl-color-accent-high);
+  color: var(--sl-color-black);
+}
+
+.hero-image {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  min-width: 200px;
+}
+
+@media (max-width: 640px) {
+  .hero-container {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+}
+</style>

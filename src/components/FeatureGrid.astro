@@ -1,23 +1,8 @@
 ---
-import { CardGrid } from '@astrojs/starlight/components';
-import { Card } from '@astrojs/starlight/components';
+// FeatureGrid.astro
+import CardGrid from './CardGrid.astro';
+import Card from './Card.astro';
 ---
-
-<style>
-  .feature-grid {
-    text-align: center;
-    padding: 10rem 1rem;
-    max-width: 60rem;
-    margin: 0 auto;
-    margin-bottom: -2rem;
-  }
-
-  .feature-grid p {
-    margin: 0 auto 3rem;
-    font-size: 1rem;
-    color: var(--sl-color-text-secondary);
-  }
-</style>
 
 <section class="feature-grid">
   <h2>From Raw Images to Intuitive Search</h2>
@@ -28,17 +13,42 @@ import { Card } from '@astrojs/starlight/components';
   </p>
 
   <CardGrid>
-    <Card title="Ingestion" icon="add-document">
-      Interesting content you want to highlight.
+    <Card title="Ingestion" icon="📄">
+      Ingest data from anywhere and normalize it into structured documents.
     </Card>
-    <Card title="Embedding" icon="seti:html">
-      More information you want to share.
+    <Card title="Embedding" icon="🧠">
+      Transform raw inputs into vector embeddings optimized for search.
     </Card>
-    <Card title="Storage" icon="open-book">
-      Interesting content you want to highlight.
+    <Card title="Storage" icon="📚">
+      Persist your embedded data for fast, efficient querying.
     </Card>
-    <Card title="Query" icon="magnifier">
-      Interesting content you want to highlight.
+    <Card title="Query" icon="🔍">
+      Retrieve relevant results with semantic understanding.
     </Card>
   </CardGrid>
 </section>
+
+<style>
+.feature-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8rem 2rem;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.feature-grid h2 {
+  font-size: var(--text-4xl);
+  color: var(--sl-color-white);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.feature-grid p {
+  text-align: center;
+  font-size: var(--text-lg);
+  color: var(--sl-color-gray-2);
+  margin-bottom: 2rem;
+}
+</style>

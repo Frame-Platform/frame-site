@@ -1,84 +1,94 @@
 ---
-import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
-import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
-const isHomepage = Astro.locals.starlightRoute.id === '';
-
+import { Icon } from "@astrojs/starlight/components";
 ---
 
-<SiteTitle/>
-<div class="link-container" data-is-home={isHomepage}>
-  {isHomepage && (
-  <nav class="doc-links">
-    <span><a href="/case-study/introduction">Case Study</a></span>
-    <span><a href="/documentation/deployment">Documentation</a></span>
-  </nav>
-  )}
-<nav class="social-links">
-    <SocialIcons/>
-</nav>
-</div>
-
+<header>
+    <a href="/" class="title-wrapper">
+      <img src="/favicon.svg" alt="Frame logo" />
+      <span>Frame</span>
+    </a>
+    <nav class="nav-links">
+      <a class="doc-link" href="/case-study/introduction">Case Study</a>
+      <a class="doc-link" href="/documentation/deployment">Documentation</a>
+      <a href="#"><Icon name="seti:github" size="1.5rem" /></a>
+      <a href="#"><Icon name="linkedin" size="1.5rem" /></a>
+    </nav>
+</header>
 
 <style>
-  :global(header:has([data-is-home="true"])) {
-    background: transparent;
-    box-shadow: none;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 10;
-    height: 90px;
-    border: none;
-  }
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 1rem 2rem;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  transition: background 0.5s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
 
-  :global(header) {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+header.scrolled {
+  background: rgba(15, 15, 17, 0.9);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
 
-  .header-wrapper {
-    display: flex;
-    width: fit-content;
-  }
+.title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--sl-color-accent-high);
+  font-weight: 600;
+  font-size: 24px;
+}
 
-  a {
-    text-decoration: none;
-    color: var(--sl-color-accent-high)
-  }
+.title-wrapper img {
+  width: 40px;
+  height: 40px;
+}
 
-  a:hover {
-    color: #788abc
-  }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
 
-  .link-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
-    white-space: nowrap;
-    flex-wrap: nowrap;
-  }
+.nav-links a {
+  text-decoration: none;
+  color: var(--sl-color-accent-high);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
 
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.nav-links a:hover {
+  color: var(--sl-color-white);
+}
 
-  .doc-links {
-    display: flex;
-    gap: 1rem;
-  }
+.doc-link {
+  font-size: 18px;
+}
 
-  .social-links {
-    display: flex;
-    gap: 1rem
-  }
-
-  @media (max-width: 640px) {
-  .link-container {
-    font-size: 10px;
+@media (max-width: 640px) {
+  .doc-link {
+    display: none;
   }
 }
 </style>
+
+<script>
+  const header = document.querySelector("header");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 100) {
+      header!.classList.add("scrolled");
+    } else {
+      header!.classList.remove("scrolled");
+    }
+  });
+</script>
