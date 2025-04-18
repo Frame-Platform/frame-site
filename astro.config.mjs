@@ -35,30 +35,29 @@ export default defineConfig({
           items: [
             // Each item here is one entry in the navigation menu.
             { label: "Introduction", slug: "case-study/introduction" },
-            { label: "Background", slug: "case-study/background" },
             {
-              label: "Existing Solutions",
-              slug: "case-study/existing-solutions",
+              label: "The Challenge of Organizing Images",
+              slug: "case-study/background",
             },
             {
-              label: "Architecture Overview",
+              label: "Building an Image Search System",
+              slug: "case-study/building-image-search",
+            },
+            {
+              label: "Introducing Frame",
+              slug: "case-study/introducing-frame",
+            },
+            {
+              label: "Frame’s Architecture",
               slug: "case-study/architecture-overview",
             },
             {
-              label: "Design Decisions & Tradeoffs",
+              label: "Design Decisions",
               slug: "case-study/design-decisions",
             },
             {
               label: "Conclusion",
               slug: "case-study/conclusion",
-            },
-            {
-              label: "Future Work",
-              slug: "case-study/future-work",
-            },
-            {
-              label: "References",
-              slug: "case-study/references",
             },
           ],
         },
