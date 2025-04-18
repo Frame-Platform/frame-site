@@ -1,11 +1,22 @@
 ---
 import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
-import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro"
 import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
 
 // const isHomepage = Astro.locals.starlightRoute.id === '';
 ---
 
-<SiteTitle/>
-<SocialIcons/>
-<ThemeSelect/>
+<header class="header">
+  <SiteTitle/>
+  <div class="social-links">
+
+  </div>
+  <!-- <SocialIcons class:list={g}/> -->
+</header>
+
+<style>
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+</style>

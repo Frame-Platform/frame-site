@@ -14,12 +14,18 @@ export default defineConfig({
       },
       components: {
         Footer: "./src/components/Footer.astro",
+        Header: "./src/components/Header.astro",
       },
       social: [
         {
           icon: "github",
           label: "GitHub",
           href: "https://github.com/UntitledCapstoneProj",
+        },
+        {
+          icon: "linkedin",
+          label: "LinkedIn",
+          href: "https://www.linkedin.com/company/frame-platform/about/",
         },
       ],
       sidebar: [

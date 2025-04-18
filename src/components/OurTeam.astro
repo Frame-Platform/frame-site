@@ -40,7 +40,6 @@ const team = [
   align-items: center;
   align-content: center;
   justify-content: center;
-  gap: 2rem;
 }
 
 .team-grid {
@@ -86,7 +85,7 @@ img {
   <div class="team-grid">
     {team.map(({ name, img, location, github, linkedin}) => (
       <div class="team-member">
-        <img src={img} alt={`Photo of ${name}`} />
+        <img src={img} alt="Team member"/>
         <h3>{name}</h3>
         <p>{location}</p>
         <div class="links">
