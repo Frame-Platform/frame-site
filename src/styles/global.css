@@ -10,7 +10,7 @@ body {
 
 .hero {
   margin-top: -90px !important;
-  background: linear-gradient(to bottom right, #17181c, #202124, #2c2c2c);
+  /* background: linear-gradient(to bottom right, #17181c, #202124, #2c2c2c); */
   background: linear-gradient(to bottom, #17181c 0%, #202124 60%, #0f0f11 100%);
   min-height: 110vh;
   display: flex;
