@@ -1,0 +1,30 @@
+---
+
+---
+
+<div id="swagger-wrapper">
+  <div id="swagger-ui"></div>
+  <link rel="stylesheet" href="/swagger-ui.css" />
+  <script is:inline src="/swagger-ui-bundle.js"></script>
+  <script>
+    // @ts-ignore
+    const SwaggerUIBundle = window["SwaggerUIBundle"];
+    window.onload = function () {
+      SwaggerUIBundle({
+        url: "/openapi.json",
+        dom_id: "#swagger-ui",
+      });
+    };
+  </script>
+</div>
+
+<style>
+  #swagger-wrapper {
+    all: revert;
+    border-radius: 15px;
+    background-color: hsl(224 70% 90% / 90%);
+  }
+  #swagger-ui {
+    padding-top: 10px;
+  }
+</style>
