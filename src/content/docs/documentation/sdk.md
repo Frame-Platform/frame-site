@@ -10,12 +10,10 @@ The Frame SDK provides a simple Typescript-based interface for interacting with 
 In Frame, a "document" represents a unit of data that gets embedded and stored in your vector database. Because Frame is multimodal, a document can be:
 
 - A piece of text (e.g., a paragraph, product description)
-
 - An image (e.g., a photo or screenshot)
-
 - A combination of both text and image (e.g., an image with a caption)
 
-We developed Frame to be flexible in this regard, to allow developers to use our platform however it suits their embedding needs.
+We developed Frame to be flexible, allowing developers to adapt the platform to their specific embedding needs.
 
 ## Installation
 
@@ -85,7 +83,10 @@ Add new documents. A document may optionally omit a URL or a description, but at
 
 :::tip
 Documents have this shape:
-`{url: string, description: string, metadata?: object}`
+
+`{url?: string, description?: string, metadata?: object}`
+
+At least one of `url` or `description` must be provided.
 :::
 
 **Example**
@@ -124,7 +125,9 @@ frame.deleteDocumentById(1);
 
 ### searchDocuments
 
-Search similar documents based on input, with optional arguments for topK (number of results) and similarity threshold (0.0 - 1.0). By default, topK is 10 and threshold is 0.
+Search similar documents based on input, with optional arguments for topK (number of results) and similarity threshold (0.0 - 1.0).
+
+By default, topK is 10 and threshold is 0.
 
 **Arguments:**
 
@@ -149,6 +152,8 @@ frame.searchDocuments(query);
 ### getRecommendations
 
 Get similar documents based on a document's ID.
+
+By default, topK is 10 and threshold is 0.
 
 **Arguments:**
 

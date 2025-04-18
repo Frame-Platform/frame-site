@@ -30,8 +30,8 @@ Before starting, you'll need:
 Clone the repository and move into the top-level directory:
 
 ```console
-git clone https://github.com/UntitledCapstoneProj/new.git
-cd new
+git clone https://github.com/UntitledCapstoneProj/Frame.git
+cd Frame
 ```
 
 ### Step 2: Build the Project Environment
@@ -46,7 +46,7 @@ This will run the `build-all.js` script to:
 
 - Set up the project environment by installing the required dependencies for the CLI and the CDK.
 - Build the CLI by compiling the TypeScript files into JavaScript.
-- Link the CLI globally on your system (so as to enable the use of the `document-embedding` commands referenced below).
+- Link the CLI globally on your system (to enable the use of the `document-embedding` commands referenced below).
 - Build the Lambda functions referenced in the CDK (packaging them up into zip files ready for deployment).
 
 ### Step 3: Configure Your Settings
@@ -69,7 +69,7 @@ This command will guide you through the initialization process. In particular, y
 
 ### Step 4: Deploy the Infrastructure to AWS
 
-Run the below command to deploy the image-embedding pipeline infrastructure to your AWS account:
+Run the below command to deploy Frame's infrastructure to your AWS account:
 
 ```console
 document-embedding deploy
@@ -79,7 +79,7 @@ During the deployment:
 
 - The CDK will create all necessary AWS resources. This process can take 10-15 minutes, so please be patient.
 - Upon completion, you'll receive confirmation of successful deployment along with important endpoints or access information for the created resources.
-- In particular, you will receive confirmation of the API Gateway URL and your specific API Access Key ID details. You will need to locate the API Key associated with the API Key ID (in the AWS Management Console) in order to connect to our API endpoints via our SDK client.
+- In particular, you will receive confirmation of the API Gateway URL and your specific API Access Key ID details. You will need to locate the API Key associated with the API Key ID (in the AWS Management Console) in order to connect to Frame's API endpoints via the Frame SDK client.
 
 ### Step 5: Set Up The Database
 
@@ -107,11 +107,11 @@ At the time of writing, the steps are:
 
 ### Step 7: Verify the Deployment
 
-Upload a test image using our SDK client to verify everything works correctly.
+Upload a test image using our SDK client to verify everything works correctly. See our [SDK documentation](/documentation/sdk/) for further information.
 
 ### Step 8: Destroying the Infrastructure
 
-When you no longer need the image-embedding pipeline, you can remove all deployed resources with:
+When you no longer need the Frame image-embedding pipeline, you can remove all deployed resources with:
 
 ```console
 document-embedding destroy
