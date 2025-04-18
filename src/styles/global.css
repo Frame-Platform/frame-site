@@ -1,3 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+.hero {
+  margin-top: -90px !important;
+  /* background: linear-gradient(to bottom right, #17181c, #202124, #2c2c2c); */
+  background: linear-gradient(to bottom, #17181c 0%, #202124 60%, #0f0f11 100%);
+  min-height: 110vh;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding-inline: max(1.5rem, 5vw);
+  gap: 2rem;
+}
+
+.hero a {
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-block: 4rem;
+  }
+
+  .hero > * {
+    width: 100%;
+  }
+
+  .hero img {
+    height: auto;
+    max-width: 240px;
+  }
+}
+
+.sl-theme-toggle {
+  display: none !important;
+}
+
 .theme-image-wrapper {
   display: grid;
   width: 100%;
@@ -26,6 +75,10 @@
   opacity: 1;
 }
 
+:root {
+  color-scheme: dark;
+}
+
 /* Dark mode colors. */
 :root {
   --sl-color-accent-low: #131e4f;
@@ -39,19 +92,4 @@
   --sl-color-gray-5: #353841;
   --sl-color-gray-6: #24272f;
   --sl-color-black: #17181c;
-}
-/* Light mode colors. */
-:root[data-theme="light"] {
-  --sl-color-accent-low: #c7d6ff;
-  --sl-color-accent: #364bff;
-  --sl-color-accent-high: #182775;
-  --sl-color-white: #17181c;
-  --sl-color-gray-1: #24272f;
-  --sl-color-gray-2: #353841;
-  --sl-color-gray-3: #545861;
-  --sl-color-gray-4: #888b96;
-  --sl-color-gray-5: #c0c2c7;
-  --sl-color-gray-6: #eceef2;
-  --sl-color-gray-7: #f5f6f8;
-  --sl-color-black: #ffffff;
 }

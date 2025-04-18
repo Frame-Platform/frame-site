@@ -1,11 +1,84 @@
 ---
 import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
-import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro"
 import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
+const isHomepage = Astro.locals.starlightRoute.id === '';
 
-// const isHomepage = Astro.locals.starlightRoute.id === '';
 ---
 
 <SiteTitle/>
-<SocialIcons/>
-<ThemeSelect/>
+<div class="link-container" data-is-home={isHomepage}>
+  {isHomepage && (
+  <nav class="doc-links">
+    <span><a href="/case-study/introduction">Case Study</a></span>
+    <span><a href="/documentation/deployment">Documentation</a></span>
+  </nav>
+  )}
+<nav class="social-links">
+    <SocialIcons/>
+</nav>
+</div>
+
+
+<style>
+  :global(header:has([data-is-home="true"])) {
+    background: transparent;
+    box-shadow: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    height: 90px;
+    border: none;
+  }
+
+  :global(header) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-wrapper {
+    display: flex;
+    width: fit-content;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--sl-color-accent-high)
+  }
+
+  a:hover {
+    color: #788abc
+  }
+
+  .link-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .doc-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem
+  }
+
+  @media (max-width: 640px) {
+  .link-container {
+    font-size: 10px;
+  }
+}
+</style>
