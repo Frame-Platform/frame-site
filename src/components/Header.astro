@@ -21,8 +21,14 @@ const isHomepage = Astro.locals.starlightRoute.id === '';
 
 <style>
   :global(header:has([data-is-home="true"])) {
-    background-color: #17181c;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: transparent;
+    box-shadow: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    height: 90px;
+    border: none;
   }
 
   :global(header) {
@@ -35,9 +41,14 @@ const isHomepage = Astro.locals.starlightRoute.id === '';
     display: flex;
     width: fit-content;
   }
+
   a {
     text-decoration: none;
     color: var(--sl-color-accent-high)
+  }
+
+  a:hover {
+    color: #788abc
   }
 
   .link-container {

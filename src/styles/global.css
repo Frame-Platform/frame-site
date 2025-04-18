@@ -8,8 +8,39 @@ body {
   font-family: "DM Sans", sans-serif;
 }
 
-[data-page="/"] header {
-  background-color: #17181c;
+.hero {
+  margin-top: -90px !important;
+  background: linear-gradient(to bottom right, #17181c, #202124, #2c2c2c);
+  background: linear-gradient(to bottom, #17181c 0%, #202124 60%, #0f0f11 100%);
+  min-height: 110vh;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding-inline: max(1.5rem, 5vw);
+  gap: 2rem;
+}
+
+.hero a {
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-block: 4rem;
+  }
+
+  .hero > * {
+    width: 100%;
+  }
+
+  .hero img {
+    height: auto;
+    max-width: 240px;
+  }
 }
 
 .sl-theme-toggle {
