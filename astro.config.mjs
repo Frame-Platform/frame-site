@@ -70,6 +70,10 @@ export default defineConfig({
               label: "Using the Frame SDK",
               slug: "documentation/sdk",
             },
+            {
+              label: "API",
+              slug: "documentation/api",
+            },
           ],
         },
       ],
