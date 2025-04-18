@@ -1,0 +1,19 @@
+---
+title: Introducing Frame
+description: Introduction to Frame and demonstration videos of CLI, SDK and functionality
+---
+
+Frame was created to fill a gap in the market: a solution for developer teams that need image search capabilities but want a simple, easy-to-configure deployment without the complexity and overhead of existing enterprise-grade systems. Frame’s design trades features and configurability for simplicity, creating a pragmatic solution that handles the core functionality of an image embedding pipeline (discussed above) without unnecessary complexity.
+
+_![][image17]_
+
+This means Frame isn’t optimized for systems requiring a highly performant enterprise solution or immediate searchability of newly uploaded content (the asynchronous ingestion pipeline means recently uploaded images may take a few moments to become searchable). Instead, Frame excels for teams:
+
+- Implementing search on small-to-moderate image collections or serving limited end users.
+- Looking for a simple, low-cost deployment where ultra-low latency is not a concern.
+- Prioritizing data sovereignty and AWS integration.
+- Building proof-of-concept implementations or internal tools (like reverse image search to detect copyright violations).
+
+Frame is an open-source solution installed directly on the end user’s AWS account via AWS Cloud Development Kit (CDK) and a simple command line workflow. Once deployed, Frame abstracts away the entire embedding and search process behind a simple API. It supports search and recommendation, with minimal setup and a type-safe, developer-friendly Software Development Kit (SDK). With just a few lines of code, users can ingest data and query results, making sophisticated image search more widely accessible. The demonstration videos below show just how easy it is to get started.
+
+## Demonstration
