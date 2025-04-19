@@ -38,8 +38,16 @@ const team = [
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-content: center;
-  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(to bottom, #17181c 20%, #141516 60%, #17181c 80%);
+  padding: 4rem 1rem;
+  color: var(--sl-color-white)
+}
+
+.team-section h2 {
+  margin-top: 0;
+  font-size: var(--text-4xl);
+  margin-bottom: 2rem;
 }
 
 .team-grid {
@@ -47,41 +55,69 @@ const team = [
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  padding: 1rem;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .team-member {
-  margin-top: 16px;
+  background: linear-gradient(145deg, #141416, #1d1d1e);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 220px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 230px;
-  height: 320px;
-  padding: 1rem;
-  box-sizing: border-box;
-  box-shadow: 3px 3px 5px 0px rgba(20, 20, 20, 0.75);
-  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-img {
-  padding: 0;
-  margin: 0;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+.team-member:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.team-member img {
+  width: 100px;
+  height: 100px;
   object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
   border: 2px solid var(--sl-color-hairline-shade);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   background-color: var(--sl-color-bg);
+}
+
+.team-member h3 {
+  margin: 0.5rem 0 0.25rem;
+  font-size: var(--text-xl);
+}
+
+.team-member p {
+  font-size: var(--text-base);
+  margin: 0 0 1rem;
+  color: #ccc;
 }
 
 .links {
   display: flex;
+  gap: 0.75rem;
+  justify-content: center;
 }
+
+.links a {
+  color: var(--sl-color-accent-high);
+  transition: color 0.3s ease;
+}
+
+.links a:hover {
+  color: #ffffff;
+}
+
 </style>
 
 <section class="team-section" id="our-team">
-  <h2>Meet The Team</h2>
+  <h2>Meet The <span class="highlight">Team</span></h2>
   <div class="team-grid">
     {team.map(({ name, img, location, github, linkedin}) => (
       <div class="team-member">
