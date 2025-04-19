@@ -2,58 +2,181 @@
 ---
 
 <style>
-  h2, h3 {
-    text-align: center;
+.dev-highlight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 6rem;
+  background: linear-gradient(to bottom, #0f0f11 20%, #202124 60%, #17181c 80%);
+  padding: 4rem 1rem;
+}
+
+.dev-highlight h2 {
+  text-align: center;
+  font-size: var(--text-4xl);
+  margin-bottom: 0.75rem;
+}
+
+.dev-highlight h3 {
+  font-size: var(--text-xl);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.dev-highlight p {
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.screenshot-stack {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  width: 30%
+}
+
+.screenshot {
+  max-width: 420px;
+  object-fit: contain;
+}
+
+.cta-button {
+  max-width: 250px;
+  text-align: center;
+  /* margin-top: 2rem;
+  padding: 0.75rem 1.25rem; */
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+  /* === Base Section === */
+/* .dev-highlight {
+  padding: 4rem 1rem;
+  background: linear-gradient(to bottom, #0f0f11 20%, #202124 60%, #17181c 80%);
+  color: #fff;
+} */
+
+.dev-highlight-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6rem;
+  max-width: 1200px;
+  /* width: 100%; */
+  /* margin: 0 auto; */
+  /* flex-wrap: wrap; */
+}
+
+/* === Text Side === */
+.dev-highlight-left {
+  /* flex: 1 1 450px;
+  max-width: 500px; */
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+/* === Screenshots === */
+.screenshot-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1 1 400px;
+  max-width: 500px;
+}
+
+.screenshot {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.20);
+}
+
+/* === CTA Button === */
+.cta-button {
+  background: var(--sl-color-accent-high);
+  color: #121212;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+  background: var(--sl-color-white);
+}
+
+.screenshot-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .dev-highlight-inner {
+    flex-direction: column-reverse;
+    padding: 0;
+    gap: 2rem;
   }
 
-
-  .dev-highlight {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 6rem;
-  }
-
-  .dev-highlight p {
-    text-align: center;
+  .dev-highlight-left {
+    padding: 0 1rem;
   }
 
   .screenshot-stack {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 2.5rem;
-    width: 30%
+    width: 100%;
+    max-width: 90%;
   }
 
   .screenshot {
-    max-width: 420px;
-    object-fit: contain;
+    max-width: 100%;
+  }
+
+  .screenshot-desktop {
+    display: none;
+  }
+
+  .screenshot-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
   }
 
   .cta-button {
-    margin-top: 2rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
+    margin-top: 1.25rem;
   }
+}
+
 </style>
 
 <section class="dev-highlight">
-  <h2>Built By Developers, For Developers</h2>
+  <div class="dev-highlight-inner">
+    <div class="dev-highlight-left">
+      <h2>Built By <span class="highlight">Developers</span> <br/>For Developers</h2>
 
-  <div class="screenshot-stack">
-    <img class="screenshot" src="/assets/frame-sdk.png" alt="SDK Screenshot" />
-    <img class="screenshot" src="/assets/splinter-cli.png" alt="CLI Screenshot" />
+      <div class="screenshot-stack screenshot-mobile">
+        <img class="screenshot" src="/assets/frame-sdk.png" alt="SDK Screenshot" />
+        <img class="screenshot" src="/assets/frame-cli.gif" alt="CLI Screenshot" />
+    </div>
+
+      <h3>Effortless Deployment. Instant API Integration.</h3>
+      <p>
+        With Frame, setting up and deploying is a breeze — simply use our intuitive CLI to get up and running in no time.
+        Plus, our SDK is designed for smooth API interaction, letting you integrate powerful search and recommendation
+        features with just a few lines of code.
+      </p>
+      <a href="/documentation/deployment" class="cta-button">Read Our Documentation</a>
+    </div>
+      <div class="screenshot-stack screenshot-desktop">
+        <img class="screenshot" src="/assets/frame-sdk.png" alt="SDK Screenshot" />
+        <img class="screenshot" src="/assets/frame-cli.gif" alt="CLI Screenshot" />
+    </div>
   </div>
-
-  <h3>Effortless Deployment. Instant API Integration.</h3>
-  <p>
-    With Frame, setting up and deploying is a breeze — simply use our intuitive CLI to get up and running in no time.
-    Plus, our SDK is designed for smooth API interaction, letting you integrate powerful search and recommendation
-    features with just a few lines of code.
-  </p>
-
-  <a href="/documentation/deployment" class="cta-button">Read Our Documentation</a>
 </section>
