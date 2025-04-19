@@ -65,3 +65,7 @@ footer {
   width: 100%;
   padding: 1rem 1.5rem;
 }
+
+.highlight {
+  color: var(--sl-color-accent-high)
+}
