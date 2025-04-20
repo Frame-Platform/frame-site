@@ -3,6 +3,10 @@ title: Design Decisions & Tradeoffs
 description: Three critical design decisions that shaped Frame's architecture
 ---
 
+import diagram27 from '../../../images/diagram27.png'
+import diagram28 from '../../../images/diagram28.png'
+import diagram29 from '../../../images/diagram29.png'
+
 Having explored Frame’s architecture, let’s examine the key design decisions that shaped its implementation.
 
 ## Embracing Serverless
@@ -11,7 +15,10 @@ A significant design decision was adopting the serverless computing model as the
 
 Serverless computing centers on Function-as-a-Service (FaaS), such as AWS Lambda. Lambda functions are triggered by specific events like HTTP requests. When a request occurs, AWS allocates the necessary resources (physical server(s)) to process the event and execute the function. If there are no incoming events, no servers are allocated, and when processing completes, any resources are released.
 
-_![][image27]Serverless request handling patterns: idle state, automatic invocation for single requests, automatic scaling for multiple requests, and release when processing completes_
+<figure>
+  <img src={diagram27.src} alt="Serverless request handling patterns: idle state, automatic invocation for single requests, automatic scaling for multiple requests, and release when processing completes" />
+  <figcaption>Serverless request handling patterns: idle state, automatic invocation for single requests, automatic scaling for multiple requests, and release when processing completes</figcaption>
+</figure>
 
 ### Why Serverless?
 
@@ -48,7 +55,10 @@ An SQS queue was placed between the API Lambda and Image Ingestion Lambda to ser
 
 ### Why SQS?
 
-_![][image28]SQS automatic retries and error handling: If image processing fails, it is automatically retried. If it fails three times, it is redirected to a Dead Letter Queue for troubleshooting._
+<figure>
+  <img src={diagram28.src} alt="SQS automatic retries and error handling: If image processing fails, it is automatically retried. If it fails three times, it is redirected to a Dead Letter Queue for troubleshooting." />
+  <figcaption>SQS automatic retries and error handling: If image processing fails, it is automatically retried. If it fails three times, it is redirected to a Dead Letter Queue for troubleshooting.</figcaption>
+</figure>
 
 SQS offered several benefits that aligned perfectly with the image processing needs of Frame’s target users:
 
@@ -86,7 +96,10 @@ After evaluating several approaches, a solution was developed using Amazon S3 (A
 3. This URL is passed to the Search Lambda, which processes it like any other URL.
 4. The temporary image is deleted from S3 after search completion.
 
-_![][image29]Frame’s temporary S3 storage solution for search image file uploads: image stored in S3 (so the associated URL can be obtained) and deleted following search completion_
+<figure>
+  <img src={diagram29.src} alt="Frame’s temporary S3 storage solution for search image file uploads: image stored in S3 (so the associated URL can be obtained) and deleted following search completion" />
+  <figcaption>Frame’s temporary S3 storage solution for search image file uploads: image stored in S3 (so the associated URL can be obtained) and deleted following search completion</figcaption>
+</figure>
 
 ### Alternative: base64
 

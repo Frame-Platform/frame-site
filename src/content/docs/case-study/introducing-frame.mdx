@@ -2,10 +2,14 @@
 title: Introducing Frame
 description: Introduction to Frame and demonstration videos of CLI, SDK and functionality
 ---
+import diagram17 from '../../../images/diagram17.png'
 
 Frame was created to fill a gap in the market: a solution for developer teams that need image search capabilities but want a simple, easy-to-configure deployment without the complexity and overhead of existing enterprise-grade systems. Frame’s design trades features and configurability for simplicity, creating a pragmatic solution that handles the core functionality of an image embedding pipeline (discussed above) without unnecessary complexity.
 
-_![][image17]_
+<figure>
+  <img src={diagram17.src} alt="A comparison of developers' options when selecting a vector search platform: Frame, Marqo, and Marqo Self-Hosted." />
+  <figcaption>A comparison of developers' options when selecting a vector search platform: Frame, Marqo, and Marqo Self-Hosted.</figcaption>
+</figure>
 
 This means Frame isn’t optimized for systems requiring a highly performant enterprise solution or immediate searchability of newly uploaded content (the asynchronous ingestion pipeline means recently uploaded images may take a few moments to become searchable). Instead, Frame excels for teams:
 

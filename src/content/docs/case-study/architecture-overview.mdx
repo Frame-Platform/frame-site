@@ -2,16 +2,31 @@
 title: Frame’s Architecture - A Streamlined Approach
 description: A deep-dive into Frame's architecture
 ---
+import diagram18 from '../../../images/diagram18.png'
+import diagram19 from '../../../images/diagram19.png'
+import diagram20 from '../../../images/diagram20.png'
+import diagram21 from '../../../images/diagram21.png'
+import diagram22 from '../../../images/diagram22.png'
+import diagram23 from '../../../images/diagram23.png'
+import diagram24 from '../../../images/diagram24.png'
+import diagram25 from '../../../images/diagram25.png'
+import diagram26 from '../../../images/diagram26.png'
 
 At a high level, Frame consists of two main functional pieces that work together:
 
 1. **Image Ingestion Pipeline**: Processes image URLs and optional text descriptions into searchable vector embeddings. This includes image validation at the API level, asynchronous processing via a queue, image pre-processing, image embedding, and embedding storage.
 
-_![][image18]Frame’s image ingestion pipeline architecture with specialized components for validation, pre-processing, embedding, and storage_
+<figure>
+  <img src={diagram18.src} alt="Frame’s image ingestion pipeline architecture with specialized components for validation, pre-processing, embedding, and storage" />
+  <figcaption>Frame’s image ingestion pipeline architecture with specialized components for validation, pre-processing, embedding, and storage</figcaption>
+</figure>
 
 2. **Search System**: Supports text, image URL, local image file uploads, and combination queries (text and image) by processing and embedding the query and using the query embedding to find similar items in the vector database.
 
-_![][image19]Frame’s search system architecture with text and image search inputs processed through validation, pre-processing, and embedding. The query embedding is used to find similar vectors stored in the database_
+<figure>
+  <img src={diagram19.src} alt="Frame’s search system architecture with text and image search inputs processed through validation, pre-processing, and embedding. The query embedding is used to find similar vectors stored in the database" />
+  <figcaption>Frame’s search system architecture with text and image search inputs processed through validation, pre-processing, and embedding. The query embedding is used to find similar vectors stored in the database</figcaption>
+</figure>
 
 Frame also supports image management operations like retrieval, deletion, and recommendations for similar images. Unlike search, recommendation functionality operates on images already embedded in the vector database. This means existing embeddings can be retrieved rather than generated anew, making recommendations particularly efficient.
 
@@ -23,7 +38,10 @@ When a user sends images to Frame’s ingestion endpoint via the SDK (demonstrat
 
 The request lifecycle starts at the AWS API Gateway. The API Gateway validates an API key and then proxies the request to a Lambda built with the web application framework Hono (hereafter referred to as the API Lambda). The API Lambda immediately validates the image format, size, and integrity.
 
-_![][image20]Image validation workflow: Request flows through API Gateway and Lambda to SQS. Immediate response to users while processing continues asynchronously_
+<figure>
+  <img src={diagram20.src} alt="Image validation workflow: Request flows through API Gateway and Lambda to SQS. Immediate response to users while processing continues asynchronously" />
+  <figcaption>Image validation workflow: Request flows through API Gateway and Lambda to SQS. Immediate response to users while processing continues asynchronously</figcaption>
+</figure>
 
 Rather than making users wait while large image files are processed asynchronously, the API Lambda sends validated image data to an AWS Simple Queue Service (SQS) queue. This allows the API Lambda to return an immediate response to the user. A queue decouples API request handling from intensive image processing while providing fault tolerance and automatic retries.
 
@@ -33,7 +51,10 @@ A second Lambda (the Image Ingestion Lambda) retrieves queue requests and proces
 2.  Using sharp to resize the image to standardized dimensions specified by the Titan embedding model (maximum 2048 pixels on any side).[^11]
 3.  Converting the processed image to a base64-encoded string for HTTP transmission to the embedding model’s API.
 
-_![][image21]Image pre-processing workflow: Image → buffer → resizing → base64_
+<figure>
+  <img src={diagram21.src} alt="Image pre-processing workflow: Image → buffer → resizing → base64" />
+  <figcaption>Image pre-processing workflow: Image → buffer → resizing → base64</figcaption>
+</figure>
 
 Users upload their images, and the system's automated embedding pipeline handles all processing operations behind the scenes, eliminating wait times while ensuring optimal resource allocation.
 
@@ -43,7 +64,10 @@ Pre-processed images are transformed into vector embeddings \- the mathematical 
 
 After pre-processing, the Image Ingestion Lambda converts the image to base64 and sends it to the embedding model, which returns a 1024-dimensional vector. This vector captures the image’s semantic characteristics for similarity search.
 
-_![][image22]Embedding generation: Lambda functions for both ingestion and search connect to Amazon Bedrock, which produces vector embeddings_
+<figure>
+  <img src={diagram22.src} alt="Embedding generation: Lambda functions for both ingestion and search connect to Amazon Bedrock, which produces vector embeddings" />
+  <figcaption>Embedding generation: Lambda functions for both ingestion and search connect to Amazon Bedrock, which produces vector embeddings</figcaption>
+</figure>
 
 This same process occurs during search operations. However, a different Lambda (the Search Lambda) generates an embedding for the search query using the identical model and parameters.
 
@@ -55,7 +79,10 @@ Frame uses PostgreSQL with the pgvector extension (deployed via Amazon RDS) to s
 
 The Image Ingestion Lambda stores the vector embedding, along with an optional description and any associated metadata, in the vector database. Database credentials are secured via AWS Secrets Manager, ensuring sensitive information remains protected.
 
-_![][image23]Embeddings stored in PostgreSQL with the pgvector extension_
+<figure>
+  <img src={diagram23.src} alt="Embeddings stored in PostgreSQL with the pgvector extension" />
+  <figcaption>Embeddings stored in PostgreSQL with the pgvector extension</figcaption>
+</figure>
 
 The choice of PostgreSQL with pgvector represents a deliberate tradeoff between performance and practical considerations. It gives us:
 
@@ -83,7 +110,10 @@ For text and image URL searches, the flow is straightforward \- the API Lambda f
 
 For local image file uploads, the API Lambda stores the file temporarily in an AWS S3 bucket. The S3 bucket allows access to the uploaded image via a URL. This URL is sent to the Search Lambda and processed like any other image URL search request. After the search is completed and the results are returned to the user, the image is deleted from the temporary S3 storage (thereby minimizing storage costs).
 
-_![][image19]Search Operation Flow: The S3 bucket provides temporary storage for uploaded local image files_
+<figure>
+  <img src={diagram19.src} alt="Search Operation Flow: The S3 bucket provides temporary storage for uploaded local image files" />
+  <figcaption>Search Operation Flow: The S3 bucket provides temporary storage for uploaded local image files</figcaption>
+</figure>
 
 Users can configure search results by specifying the number of results they want (top N) and setting similarity thresholds to fine-tune relevance.
 
@@ -93,19 +123,28 @@ The recommendation endpoint retrieves an existing embedding by ID, performs a si
 
 This is particularly useful for "more like this" functionality in user interfaces, allowing for intuitive content exploration without requiring users to construct explicit queries.
 
-_![][image24]Recommendation Operation Flow: Direct retrieval of similar images using existing embeddings, bypassing pre-processing and embedding generation_
+<figure>
+  <img src={diagram24.src} alt="Recommendation Operation Flow: Direct retrieval of similar images using existing embeddings, bypassing pre-processing and embedding generation" />
+  <figcaption>Recommendation Operation Flow: Direct retrieval of similar images using existing embeddings, bypassing pre-processing and embedding generation</figcaption>
+</figure>
 
 ### Image Management Operations
 
 For basic image operations like listing, retrieving, or deleting images, the API Lambda connects directly to the database as these operations don’t require embedding generation or complex processing. This reduces complexity and improves response times.
 
-_![][image25]Image Management Operation Flow: Fetch/delete operations connect directly to the database from the API_
+<figure>
+  <img src={diagram25.src} alt="Image Management Operation Flow: Fetch/delete operations connect directly to the database from the API" />
+  <figcaption>Image Management Operation Flow: Fetch/delete operations connect directly to the database from the API</figcaption>
+</figure>
 
 ## Bringing It All Together with the SDK
 
 A TypeScript-based SDK makes all of Frame’s functionality easily accessible to developers. The SDK exposes six core methods that map directly to Frame API endpoints.
 
-_![][image26]Frame’s SDK connects a user’s application to the Frame infrastructure. Six SDK methods map to Frame API endpoints_
+<figure>
+  <img src={diagram26.src} alt="Frame’s SDK connects a user’s application to the Frame infrastructure. Six SDK methods map to Frame API endpoints" />
+  <figcaption>Frame’s SDK connects a user’s application to the Frame infrastructure. Six SDK methods map to Frame API endpoints</figcaption>
+</figure>
 
 For detailed implementation guidance and examples, developers can refer to Frame's comprehensive [SDK documentation](/documentation/sdk/) and [demonstration videos](/case-study/introducing-frame#demonstration).
 

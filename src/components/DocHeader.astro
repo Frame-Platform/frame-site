@@ -1,14 +1,14 @@
 ---
-import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro"
-import Search from "@astrojs/starlight/components/Search.astro"
-import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro"
+import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
+import Search from "@astrojs/starlight/components/Search.astro";
+import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
 ---
 
 <header>
-  <SiteTitle/>
+  <SiteTitle />
   <nav>
-    <Search/>
-    <SocialIcons/>
+    <Search />
+    <SocialIcons />
   </nav>
 </header>
 
@@ -29,5 +29,9 @@ import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro"
     nav {
       display: none;
     }
-}
+  }
 </style>
+
+<script is:inline>
+  document.documentElement.dataset.theme = "dark";
+</script>

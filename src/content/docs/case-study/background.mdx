@@ -3,6 +3,16 @@ title: The Challenge of Organizing Images
 description: Background to the challenges of organizing images, explaining why building an image search system from scratch is difficult
 ---
 
+import diagram2 from '../../../images/diagram2.png'
+import diagram3 from '../../../images/diagram3.png'
+import diagram4 from '../../../images/diagram4.png'
+import diagram5 from '../../../images/diagram5.png'
+import diagram6 from '../../../images/diagram6.png'
+import diagram7 from '../../../images/diagram7.png'
+import diagram8 from '../../../images/diagram8.png'
+import diagram9 from '../../../images/diagram9.png'
+import diagram10 from '../../../images/diagram10.png'
+
 When working with text, organizations benefit from language’s natural structure and searchability via keywords, tags, headings, and full-text search. In contrast, image organization systems must first analyze inherently unstructured visual data that lacks text’s built-in cues.
 
 ## The Traditional Approaches
@@ -11,7 +21,10 @@ When working with text, organizations benefit from language’s natural structur
 
 The simplest way to address the problem of organizing images is to have human curators or users assign keywords, tags, titles, categories, and captions to images, labeling them with terms like "sunset," "portrait," or "New York City" to enhance searchability. Unfortunately, this process is time-consuming, subjective, and inconsistent, as different people may describe the same image differently. This inconsistency, combined with the reliance on humans to manually provide these labels for every image, creates significant challenges for search systems attempting to deliver reliable, consistent, high-quality results.
 
-_![][image2]Three images categorized by manual labeling_
+<figure>
+  <img src={diagram2.src} alt="three images categorized by manual labeling" />
+  <figcaption>three images categorized by manual labeling</figcaption>
+</figure>
 
 Further, as the number of images within a category grows, it can become difficult for a user to find the most relevant results, as labeling does not provide a way to rank the image’s relevance within the label/category. How does a user find the most relevant sunset image when hundreds share the same tag?[^1]
 
@@ -21,7 +34,10 @@ While image labeling has limitations, it remains prevalent in advanced image sea
 
 To address the issue of unranked results, some companies implement systems that incorporate user behavior to rank search results. Shutterstock, for example, uses behavioral data like downloads as implicit feedback to assess and rank image quality. This approach helps the system identify which images a user finds valuable for specific searches, refining future recommendations.
 
-_![][image3]Ranking based on download counts: popular content appears while new content is buried_
+<figure>
+  <img src={diagram3.src} alt="Ranking based on download counts: popular content appears while new content is buried" />
+  <figcaption>Ranking based on download counts: popular content appears while new content is buried</figcaption>
+</figure>
 
 One downside to this approach is known within recommendation systems as the ‘cold start’ problem \- when new images are added, they lack significant user data. Without this data, these images are unlikely to appear near the top of search results, creating a chicken-or-the-egg situation where users can’t discover new content because it hasn’t been previously discovered. This can significantly limit the visibility of newly added images, regardless of their potential relevance or quality.[^2]
 
@@ -33,17 +49,26 @@ Instead of relying on manual labels or user behavior, what if software could act
 
 A neural network is a machine learning program or model that makes decisions that resemble how the human brain functions, using processes that imitate how biological neurons collaborate to identify patterns, evaluate options, and draw conclusions. In particular, neural networks can identify patterns in data (like objects in images or the semantic meaning of sentences) and recognize abstract qualities (like mood or style). This is possible because the network discovers patterns by analyzing millions of images during training. For example, a well-trained neural network can learn that certain combinations of color, lighting, and compositional elements evoke certain moods, identifying a vibrant Tokyo city scene as ‘energetic’.
 
-_![][image4]An image of a dog transformed through an embedding model into its lower-dimensional vector representation_
+<figure>
+  <img src={diagram4.src} alt="An image of a dog transformed through an embedding model into its lower-dimensional vector representation" />
+  <figcaption>An image of a dog transformed through an embedding model into its lower-dimensional vector representation</figcaption>
+</figure>
 
 Within this broader family of neural networks, specialized architectures called embedding models serve to convert large, detailed pieces of unstructured data (like an image) into a structured list of numbers. This list is referred to as an embedding.
 
 An embedding is a mathematical vector. For example, a 2D vector (like \[3, 4\]) represents a position in two-dimensional space, identified by two numbers: an x-coordinate (3) and a y-coordinate (4). This can be easily visualized on a flat surface.
 
-_![][image5]Vector embeddings positioned on a 2D plane_
+<figure>
+  <img src={diagram5.src} alt="Vector embeddings positioned on a 2D plane"/>
+  <figcaption>Vector embeddings positioned on a 2D plane</ figcaption>
+</figure>
 
 If a third number is added, a 3D vector (say, \[3, 4, 2\]) is created with an additional z-coordinate (2). This can still be visualized as a point floating in a room.
 
-_![][image6]Vector embeddings positioned in a 3D coordinate space_
+<figure>
+  <img src={diagram6.src} alt="Vector embeddings positioned in a 3D coordinate space"/>
+  <figcaption>Vector embeddings positioned in a 3D coordinate space</figcaption>
+</figure>
 
 Each number represents a specific feature or aspect of the original data, capturing tangible features (objects, colors) and intangible qualities (mood, style). An embedding fundamentally acts as a digital fingerprint or blueprint that captures the key identifying elements of some unstructured data, including what it contains, how its compositional elements relate to each other, and the feeling it evokes.
 
@@ -53,23 +78,33 @@ This is important because images with similar visual characteristics (colors, sh
 
 Cosine similarity measures the similarity between embedding vectors by evaluating the angle between them in a high-dimensional embedding space. Instead of focusing on absolute value differences, it assesses how aligned the directions of the vectors are. A small angle indicates the embeddings point in nearly the same direction, suggesting they share similar features, while a larger angle reflects significant differences. This technique simplifies complex relationships in high-dimensional space into an intuitive metric for quantifying similarity and ranking the most similar results (known as ‘nearest neighbors’).
 
-_![][image7]Comparison of cosine similarity: similar vectors (two dogs) with a small angle versus different vectors (dog and sunset) with a large angle_
+<figure>
+  <img src={diagram7.src} alt="Comparison of cosine similarity: similar vectors (two dogs) with a small angle versus different vectors (dog and sunset) with a large angle"/><figcaption>Comparison of cosine similarity: similar vectors (two dogs) with a small angle versus different vectors (dog and sunset) with a large angle </figcaption>
+</figure>
 
 Because each embedding represents the encoded features of a specific image, it's important to restate here that similarity is determined by multiple visual characteristics of the input image (including aspects like texture, color, mood, and content), enabling more nuanced comparisons than would be possible with simple categorical matching alone.
 
-_![][image8]Similar cloud paintings clustered together in vector space (nearest neighbors)_
+<figure>
+  <img src={diagram8.src} alt="Similar cloud paintings clustered together in vector space (nearest neighbors)"/>
+  <figcaption>Similar cloud paintings clustered together in vector space (nearest neighbors)</figcaption>
+</figure>
 
 An image organizational system that uses embeddings must first generate and store embeddings for all images in its dataset. Then, when a user uploads a photo to search with, the system must encode the search photo into an embedding and compare that embedding against the other stored images in the system to return the nearest neighbors or most visually similar images. However, this model is limited to only image-based queries, meaning a user must provide an image to find similar images. This leads us to the next technological evolution: multimodal embeddings.
 
 ## Enter Multimodal Embeddings
 
-Multimodal embeddings combine data types, such as text and images, into a unified embedding space. Similar content is positioned close to each other, regardless of its original format. For example, a photograph of a Pug and the word "dog" could be located next to each other in this embedding space. This enables comparison of both formats based on their encoded features, effectively illustrating their similarities and differences.
+Multimodal embeddings combine data types, such as text and images, into a unified embedding space. Similar content is positioned close to each other, regardless of its original format. For example, a photograph of a Labrador Retriever and the word "Dog" could be located next to each other in this embedding space. This enables comparison of both formats based on their encoded features, effectively illustrating their similarities and differences.
 
-_![][image9]Multimodal embedding comparison: similar vectors (‘Dog’ text and dog image) with a small angle versus different vectors (‘Gandalf’ text and dog image) with a large angle_
+<figure>
+  <img src={diagram9.src} alt="Multimodal embedding comparison: similar vectors (‘Dog’ text and dog image) with a small angle versus different vectors (‘Gandalf’ text and dog image) with a large angle"/><figcaption>Multimodal embedding comparison: similar vectors (‘Dog’ text and dog image) with a small angle versus different vectors (‘pterodactyl’ text and dog image) with a large angle</figcaption>
+</figure>
 
 This technology is powerful because it enables users to search using whatever format feels natural \- an example image, text description, or combination of both. In each case, the multimodal embedding model can create a search embedding to evaluate the most similar stored embeddings.
 
-_![][image10]Semantic clustering of related dog (text and image) content in multimodal embedding space_
+<figure>
+  <img src={diagram10.src} alt="Semantic clustering of related dog (text and image) content in multimodal embedding space"/>
+  <figcaption>Semantic clustering of related dog (text and image) content in multimodal embedding space</figcaption>
+</figure>
 
 Multimodal embeddings are particularly valuable for platforms that manage large collections of visual content, such as image-sharing sites (like Flickr and Pinterest), stock media marketplaces (like Envato), or platforms for user-generated art and designs (like Redbubble). By embedding visual and textual information into a shared embedding space, these systems provide more intuitive search results and enhance recommendations, improving user experience and content discoverability.
 

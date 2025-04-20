@@ -12,32 +12,10 @@ body {
   display: none !important;
 }
 
-.theme-image-wrapper {
-  display: grid;
-  width: 100%;
-}
-
-.theme-image-wrapper img {
-  grid-area: 1 / 1 / 2 / 2;
-  width: 100%;
-  height: auto;
-}
-
-.light-image {
-  opacity: 1;
-}
-
-.dark-image {
-  opacity: 0;
-}
-
-/* When dark theme is active */
-[data-theme="dark"] .light-image {
-  opacity: 0;
-}
-
-[data-theme="dark"] .dark-image {
-  opacity: 1;
+figcaption {
+  font-size: small;
+  text-align: center;
+  margin-top: 0.5rem !important;
 }
 
 :root {
