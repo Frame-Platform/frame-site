@@ -14,6 +14,7 @@ export default defineConfig({
       },
       components: {
         MobileMenuFooter: "./src/components/MobileMenuFooter.astro",
+        Header: "./src/components/DocHeader.astro",
       },
       social: [
         {
