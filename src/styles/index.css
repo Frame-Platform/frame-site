@@ -58,6 +58,7 @@ body {
 main {
   display: flex;
   flex-direction: column;
+  /* background: linear-gradient(to bottom, #0f0f11, #202124 60%, #17181c 0%); */
 }
 
 header,
@@ -67,5 +68,5 @@ footer {
 }
 
 .highlight {
-  color: var(--sl-color-accent-high)
+  color: var(--sl-color-accent-high);
 }
