@@ -6,15 +6,27 @@
     text-align: center;
   }
 
+  p {
+    font-size: var(--text-lg);
+    color: var(--sl-color-gray-2);
+  }
+
+  .feature-wrapper {
+    width: 100%;
+    background: linear-gradient(to bottom, #0f0f11 0%, #202124 60%, #0f0f11);
+  }
+
   .feature-showcase {
     max-width: 1100px;
     margin: 0 auto;
     padding: 4rem 1rem;
+    /* background: linear-gradient(to bottom, #0f0f11, #202124 60%, #17181c); */
   }
 
   .feature-showcase h2 {
     text-align: center;
     margin-bottom: 3rem;
+    font-size: var(--text-4xl);
   }
 
   .feature-row {
@@ -41,8 +53,8 @@
   }
 
   .feature-content h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: var(--text-2xl);
+    font-weight: bold;
     margin-bottom: 0.5rem;
   }
 
@@ -58,29 +70,29 @@
   }
 </style>
 
+<div class="feature-wrapper">
 <section class="feature-showcase">
-  <h2>Find What You’re Really Looking For</h2>
+  <h2>Find What You’re <span class="highlight">Really</span> Looking For</h2>
 
   <!-- Query By Text -->
   <div class="feature-row">
     <div class="feature-image">
-      <img src="/assets/monkey1.gif" alt="Natural Language Search" />
+      <img src="/assets/search-by-text.gif" alt="Natural Language Search" />
     </div>
     <div class="feature-content">
-      <h3>Query with Natural Language</h3>
+      <h3>Query with <span class="highlight">Natural Language</span></h3>
       <p>
-        Watch as Frame transforms natural language into precise visual results — powered by real-time vector embeddings and our lightweight, self-hosted architecture.
+        Watch as Frame transforms complex queries into precise visual results — powered by real-time vector embeddings and our lightweight, self-hosted architecture.
       </p>
     </div>
   </div>
-
   <!-- Query By Image -->
   <div class="feature-row reverse">
     <div class="feature-image">
-      <img src="/assets/monkey2.gif" alt="Reverse Image Search" />
+      <img src="/assets/search-by-image.gif" alt="Reverse Image Search" />
     </div>
     <div class="feature-content">
-      <h3>Reverse Image Search</h3>
+      <h3><span class="highlight">Reverse</span> Image Search</h3>
       <p>
         Upload a photo to uncover visually and semantically similar results — whether it’s near-duplicates, related styles, or thematically linked content.
       </p>
@@ -90,13 +102,14 @@
   <!-- Recommendation -->
   <div class="feature-row">
     <div class="feature-image">
-      <img src="/assets/monkey3.gif" alt="Smart Recommendations" />
+      <img src="/assets/recommendations.gif" alt="Smart Recommendations" />
     </div>
     <div class="feature-content">
-      <h3>Smart Recommendations</h3>
+      <h3>Smart <span class="highlight">Recommendations</span></h3>
       <p>
         Whether you’re exploring artwork, researching topics, or browsing product catalogs, Frame helps surface “more like this” results that actually feel relevant.
       </p>
     </div>
   </div>
+</div>
 </section>
