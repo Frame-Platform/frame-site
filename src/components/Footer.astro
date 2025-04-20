@@ -3,42 +3,45 @@
 
 <style>
 .custom-footer {
-  margin-top: 3rem;
-  margin-bottom: 0;
-  padding: 1rem;
-  padding-bottom: 0;
+  padding: 1rem 1rem;
+  background: linear-gradient(to bottom, #121212 60%, #0f0f11);
   text-align: center;
   font-size: 0.875rem;
-  color: var(--sl-color-text);
-  border-top: 1px solid var(--sl-color-hairline-shade);
+  color: #aaa;
+  /* border-top: 1px solid rgba(255, 255, 255, 0.05); */
 }
 
 .footer-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  gap: 1rem;
 }
 
 .footer-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .footer-links a {
-  color: var(--sl-color-text-accent);
+  color: #a8a8ff;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .footer-links a:hover {
+  color: #ffffff;
   text-decoration: underline;
 }
+
 </style>
 
 
 <footer class="custom-footer">
   <div class="footer-content">
-    <p>© 2024 Frame. All rights reserved.</p>
+    <p>© 2024 Frame</p>
     <nav class="footer-links">
       <a href="/documentation/deployment">Docs</a>
       <a href="/case-study/introduction">Case Study</a>
