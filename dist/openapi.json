@@ -1,0 +1,1191 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Frame"
+  },
+  "components": {
+    "schemas": {},
+    "parameters": {}
+  },
+  "paths": {
+    "/document": {
+      "get": {
+        "tags": ["documents"],
+        "description": "Get a paginated list of documents",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "description": "Number of items to return (max 100, default 20)"
+            },
+            "required": false,
+            "description": "Number of items to return (max 100, default 20)",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "nullable": true,
+              "minimum": 0,
+              "default": 0,
+              "description": "Number of items to skip before starting to collect the result set (default 0)"
+            },
+            "required": false,
+            "description": "Number of items to skip before starting to collect the result set (default 0)",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "x-api-key",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of documents",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "documents": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "nullable": true,
+                            "format": "uri"
+                          },
+                          "description": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "metadata": {
+                            "type": "object",
+                            "additionalProperties": {
+                              "nullable": true
+                            }
+                          },
+                          "id": {
+                            "type": "number"
+                          }
+                        },
+                        "required": ["id"]
+                      }
+                    },
+                    "limit": {
+                      "type": "number"
+                    },
+                    "offset": {
+                      "type": "number"
+                    },
+                    "count": {
+                      "type": "number"
+                    }
+                  },
+                  "required": ["documents", "limit", "offset", "count"]
+                },
+                "example": {
+                  "documents": [
+                    {
+                      "id": 1,
+                      "url": "https://example.com/cezanne.png",
+                      "description": "A painting of the Mont Sainte-Victoire",
+                      "metadata": {
+                        "title": "Mont Sainte-Victoire",
+                        "medium": "oil on canvas",
+                        "date": "1902-04"
+                      }
+                    },
+                    {
+                      "id": 2,
+                      "url": "https://example.com/pic2.png",
+                      "description": null,
+                      "metadata": null
+                    }
+                  ],
+                  "limit": 2,
+                  "offset": 0,
+                  "count": 2
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "enum": ["ZodError"]
+                    },
+                    "issues": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "expected": {
+                            "nullable": true
+                          },
+                          "received": {
+                            "nullable": true
+                          },
+                          "path": {
+                            "type": "array",
+                            "items": {
+                              "anyOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "number"
+                                }
+                              ]
+                            }
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["code", "path", "message"]
+                      }
+                    }
+                  },
+                  "required": ["name", "issues"]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"]
+                },
+                "example": {
+                  "error": "Internal Server Error."
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["documents"],
+        "description": "Add new document(s)",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "x-api-key",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "description": "Receives images via URL and optional descriptions and queues them for embedding.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "documents": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "nullable": true,
+                          "format": "uri"
+                        },
+                        "description": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "metadata": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": ["documents"]
+              },
+              "example": {
+                "documents": [
+                  {
+                    "url": "https://example.com/colosseum.jpg",
+                    "description": "A photograph of tourists strolling around the Colosseum on a summer day.",
+                    "metadata": {
+                      "title": "The Colosseum",
+                      "photographer": "John Doe",
+                      "altText": "A photo of the Colosseum in Rome"
+                    }
+                  },
+                  {
+                    "url": "https://example.com/pantheon.jpg"
+                  },
+                  {
+                    "description": "An image with no URL, only a description"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Validation results of images.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri"
+                      },
+                      "description": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "metadata": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "nullable": true
+                        }
+                      },
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "errors": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["success"]
+                  }
+                },
+                "example": [
+                  {
+                    "url": "https://example.com/image1.jpg",
+                    "metadata": {
+                      "altText": "A photo of the Colosseum in Rome"
+                    },
+                    "success": true
+                  },
+                  {
+                    "description": "An image with no URL, only a description",
+                    "metadata": null,
+                    "success": true
+                  },
+                  {
+                    "url": null,
+                    "description": null,
+                    "success": false,
+                    "errors": "At least one of url or description must be provided."
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "enum": ["ZodError"]
+                    },
+                    "issues": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "expected": {
+                            "nullable": true
+                          },
+                          "received": {
+                            "nullable": true
+                          },
+                          "path": {
+                            "type": "array",
+                            "items": {
+                              "anyOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "number"
+                                }
+                              ]
+                            }
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["code", "path", "message"]
+                      }
+                    }
+                  },
+                  "required": ["name", "issues"]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"]
+                },
+                "example": {
+                  "error": "Internal Server Error."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/document/{id}": {
+      "get": {
+        "tags": ["documents"],
+        "description": "Find a document by an ID",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "x-api-key",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The document was found and returned successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "document": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "nullable": true,
+                          "format": "uri"
+                        },
+                        "description": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "metadata": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "id": {
+                          "type": "number"
+                        }
+                      },
+                      "required": ["id"]
+                    }
+                  },
+                  "required": ["document"]
+                },
+                "example": {
+                  "document": {
+                    "id": 7,
+                    "url": "https://example.com/monkeyselfie.jpeg",
+                    "description": "An image of monkey taking a selfie.",
+                    "metadata": {
+                      "tags": ["monkey", "animal", "selfie"]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "enum": ["ZodError"]
+                    },
+                    "issues": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "expected": {
+                            "nullable": true
+                          },
+                          "received": {
+                            "nullable": true
+                          },
+                          "path": {
+                            "type": "array",
+                            "items": {
+                              "anyOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "number"
+                                }
+                              ]
+                            }
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["code", "path", "message"]
+                      }
+                    }
+                  },
+                  "required": ["name", "issues"]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Document Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"]
+                },
+                "example": {
+                  "error": "Document Not Found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"]
+                },
+                "example": {
+                  "error": "Internal Server Error."
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["documents"],
+        "description": "Deleteing a document",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "x-api-key",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document successfully deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "document": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "nullable": true,
+                          "format": "uri"
+                        },
+                        "description": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "metadata": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "id": {
+                          "type": "number"
+                        }
+                      },
+                      "required": ["id"]
+                    }
+                  },
+                  "required": ["document"]
+                },
+                "example": {
+                  "document": {
+                    "id": 42,
+                    "url": "https://example.com/monalisa.jpeg",
+                    "description": "Image of a sitting woman.",
+                    "metadata": {
+                      "title": "Mona Lisa",
+                      "artist": "Leonardo da Vinci"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "enum": ["ZodError"]
+                    },
+                    "issues": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "expected": {
+                            "nullable": true
+                          },
+                          "received": {
+                            "nullable": true
+                          },
+                          "path": {
+                            "type": "array",
+                            "items": {
+                              "anyOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "number"
+                                }
+                              ]
+                            }
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["code", "path", "message"]
+                      }
+                    }
+                  },
+                  "required": ["name", "issues"]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Document not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"]
+                },
+                "example": {
+                  "error": "Document Not Found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"]
+                },
+                "example": {
+                  "error": "Internal Server Error."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search": {
+      "post": {
+        "tags": ["documents"],
+        "description": "Search for documents using an image or description",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "x-api-key",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "description": "Search the database using an image, a description, or both, with optional parameters to fine-tune the results.\n\nAccepted image types: image/jpeg, image/png.\n\nImage URLs and uploaded files must be smaller than 5.00 MB.\n\nFor JSON requests:\n- The request body must include either a `url` pointing to an image, a `description` string, or both.\n- If both are provide both will be encoded and compared independently using cosine similarity.\n\nFor multipart/form-data requests:\n- You must provide either an uploaded image file (`image`) or a `description` or both.\n\nOptional parameters:\n- `threshold` (number between 0.0 and 1.0, default: 0): Filters out results below this cosine similarity threshold.\n- `topK` (default: 10): Limits the number of top results returned.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "nullable": true,
+                    "format": "uri"
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    }
+                  },
+                  "threshold": {
+                    "type": "number",
+                    "nullable": true,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 0,
+                    "description": "Cosine similarity threshold (between 0 and 1). Results with a similarity below this value will be excluded."
+                  },
+                  "topK": {
+                    "type": "number",
+                    "nullable": true,
+                    "maximum": 100,
+                    "default": 10,
+                    "description": "The maximum number of top results to return. Must not exceed 100."
+                  }
+                },
+                "example": {
+                  "url": "https://media.newyorker.com/photos/59095bb86552fa0be682d9d0/master/pass/Monkey-Selfie.jpg",
+                  "description": "An image of a monkey taking a selfie.",
+                  "threshold": 0.75,
+                  "topK": 12
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {},
+                  "description": {
+                    "type": "string",
+                    "description": "An optional description or query."
+                  },
+                  "threshold": {
+                    "type": "number",
+                    "nullable": true,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 0,
+                    "description": "Cosine similarity threshold (between 0 and 1). Results with a similarity below this value will be excluded."
+                  },
+                  "topK": {
+                    "type": "number",
+                    "nullable": true,
+                    "maximum": 100,
+                    "default": 10,
+                    "description": "The maximum number of top results to return. Must not exceed 100."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "hits": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "nullable": true,
+                          "format": "uri"
+                        },
+                        "description": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "metadata": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "id": {
+                          "type": "number"
+                        },
+                        "timestamp": {
+                          "type": "string"
+                        },
+                        "score": {
+                          "type": "number"
+                        }
+                      },
+                      "required": ["id", "timestamp", "score"]
+                    },
+                    "count": {
+                      "type": "number"
+                    }
+                  },
+                  "required": ["hits", "count"]
+                },
+                "example": {
+                  "hits": [
+                    {
+                      "id": 171,
+                      "url": "https://media.newyorker.com/photos/59095bb86552fa0be682d9d0/master/pass/Monkey-Selfie.jpg",
+                      "description": "A monkey taking a selfie.",
+                      "metadata": {
+                        "tags": ["animals"]
+                      },
+                      "timestamp": "2025-03-31T16:30:41.484Z",
+                      "score": 0.6692581354088997
+                    }
+                  ],
+                  "count": 1
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["error"]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "enum": ["ZodError"]
+                        },
+                        "issues": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "string"
+                              },
+                              "expected": {
+                                "nullable": true
+                              },
+                              "received": {
+                                "nullable": true
+                              },
+                              "path": {
+                                "type": "array",
+                                "items": {
+                                  "anyOf": [
+                                    {
+                                      "type": "string"
+                                    },
+                                    {
+                                      "type": "number"
+                                    }
+                                  ]
+                                }
+                              },
+                              "message": {
+                                "type": "string"
+                              }
+                            },
+                            "required": ["code", "path", "message"]
+                          }
+                        }
+                      },
+                      "required": ["name", "issues"]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"]
+                },
+                "example": {
+                  "error": "Internal Server Error."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/document/{id}/recommend": {
+      "post": {
+        "tags": ["documents"],
+        "description": "Get similar documents based on a specified document ID",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "x-api-key",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "description": "Get recommended images using the image ID for an image stored in the database, with optional parameters to fine-tune the results.\n\nOptional parameters:\n- `threshold` (number between 0.0 and 1.0, default: 0): Filters out results below this cosine similarity threshold.\n- `topK` (default: 10): Limits the number of top results returned.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "threshold": {
+                    "type": "number",
+                    "nullable": true,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 0,
+                    "description": "Cosine similarity threshold (between 0 and 1). Results with a similarity below this value will be excluded."
+                  },
+                  "topK": {
+                    "type": "number",
+                    "nullable": true,
+                    "maximum": 100,
+                    "default": 10,
+                    "description": "The maximum number of top results to return. Must not exceed 100."
+                  }
+                },
+                "example": {
+                  "topK": 5,
+                  "threshold": 0.7
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Recommendations retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "hits": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "nullable": true,
+                            "format": "uri"
+                          },
+                          "description": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "metadata": {
+                            "type": "object",
+                            "additionalProperties": {
+                              "nullable": true
+                            }
+                          },
+                          "id": {
+                            "type": "number"
+                          },
+                          "timestamp": {
+                            "type": "string"
+                          },
+                          "score": {
+                            "type": "number"
+                          }
+                        },
+                        "required": ["id", "timestamp", "score"]
+                      }
+                    },
+                    "count": {
+                      "type": "number"
+                    }
+                  },
+                  "required": ["hits", "count"]
+                },
+                "example": {
+                  "hits": [
+                    {
+                      "id": "171",
+                      "url": "https://media.newyorker.com/photos/59095bb86552fa0be682d9d0/master/pass/Monkey-Selfie.jpg",
+                      "description": "An image of Naruto the monkey taking a selfie.",
+                      "metadata": {
+                        "title": "Monkey Selfie",
+                        "photographer": "David Slater"
+                      },
+                      "timestamp": "2025-03-31T16:30:41.484Z",
+                      "score": 0.8922581354088998
+                    },
+                    {
+                      "id": "185",
+                      "url": "https://example.com/image2.jpg",
+                      "description": "Mountain view with similar lighting conditions.",
+                      "metadata": {
+                        "tags": ["nature", "mountains"]
+                      },
+                      "timestamp": "2025-03-30T14:22:18.102Z",
+                      "score": 0.8452581354088997
+                    }
+                  ],
+                  "count": 2
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["error"]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "enum": ["ZodError"]
+                        },
+                        "issues": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "string"
+                              },
+                              "expected": {
+                                "nullable": true
+                              },
+                              "received": {
+                                "nullable": true
+                              },
+                              "path": {
+                                "type": "array",
+                                "items": {
+                                  "anyOf": [
+                                    {
+                                      "type": "string"
+                                    },
+                                    {
+                                      "type": "number"
+                                    }
+                                  ]
+                                }
+                              },
+                              "message": {
+                                "type": "string"
+                              }
+                            },
+                            "required": ["code", "path", "message"]
+                          }
+                        }
+                      },
+                      "required": ["name", "issues"]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Document Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"]
+                },
+                "example": {
+                  "error": "Document Not Found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"]
+                },
+                "example": {
+                  "error": "Internal Server Error."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
