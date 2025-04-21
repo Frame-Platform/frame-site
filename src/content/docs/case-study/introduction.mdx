@@ -5,13 +5,22 @@ description: Case Study introduction
 
 import diagram1 from "../../../images/diagram1.png";
 
-Frame is an image search platform built for developers. It provides vector embedding search and recommendation capabilities through a simple API, is quickly deployed, and handles the entire image search pipeline while giving users full data control. Modern businesses must efficiently organize, search for, and recommend visual and textual content across their platforms. For example, e-commerce marketplaces with thousands of product photos need search functionality beyond just product titles and descriptions, as users increasingly demand more intuitive ways to find visual content, whether by uploading similar images, using nuanced natural language descriptions, or combining both.
+Frame is an image search platform built for developers, offering image embedding and multimodal similarity search via an easy-to-use API. It abstracts the entire embedding and image search pipeline and deploys it to the user's AWS account.
+
+Modern businesses must efficiently organize, search for, and recommend visual and textual content across their platforms. For example, e-commerce marketplaces with thousands of product photos need search functionality beyond just product titles and descriptions, as users increasingly demand more intuitive ways to find visual content, whether by uploading similar images, using nuanced natural language descriptions, or combining both.
 
 Developers implementing these features face technical challenges: validating and processing diverse image formats, generating vector representations, storing them efficiently, and creating a query system that handles both text and images seamlessly. Each component requires specific expertise, diverting development teams from their core application features and business logic.
 
 <figure>
-  <img src={diagram1.src} alt="Frame is a deployable infrastructure that implements the core features of an image search platform: search by description, search by image, recommendations, and uploading and embedding of images."/>
-  <figcaption>Frame is a deployable infrastructure that implements the core features of an image search platform: search by description, search by image, recommendations, and uploading and embedding of images.</figcaption>
+  <img
+    src={diagram1.src}
+    alt="Frame is a deployable infrastructure that implements the core features of an image search platform: search by description, search by image, recommendations, and uploading and embedding of images."
+  />
+  <figcaption>
+    Frame is a deployable infrastructure that implements the core features of an
+    image search platform: search by description, search by image,
+    recommendations, and uploading and embedding of images.
+  </figcaption>
 </figure>
 
 Frame addresses these challenges by abstracting the underlying complexities, allowing developers to implement sophisticated image search functionality without needing to master specialized technical domains.
