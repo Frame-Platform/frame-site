@@ -5,6 +5,7 @@ import studiocmsUi from "@studiocms/ui";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://frame-platform.com",
   integrations: [
     starlight({
       title: "Frame",
