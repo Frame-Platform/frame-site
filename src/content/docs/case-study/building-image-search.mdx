@@ -2,18 +2,26 @@
 title: From Theory to Practice - Building an Image Search System
 description: Explanation of how to build an image search system from scratch and the key functionality required for a complete solution
 ---
-import diagram11 from '../../../images/diagram11.png'
-import diagram12 from '../../../images/diagram12.png'
-import diagram13 from '../../../images/diagram13.png'
-import diagram14 from '../../../images/diagram14.png'
-import diagram15 from '../../../images/diagram15.png'
-import diagram16 from '../../../images/diagram16.png'
+
+import diagram11 from "../../../images/diagram11.png";
+import diagram12 from "../../../images/diagram12.png";
+import diagram13 from "../../../images/diagram13.png";
+import diagram14 from "../../../images/diagram14.png";
+import diagram15 from "../../../images/diagram15.png";
+import diagram16 from "../../../images/diagram16.png";
 
 Modern businesses often accumulate vast image collections. Existing search functionality typically relies on associated text data like titles and descriptions. However, users now expect more intuitive search capabilities \- searching by uploading similar images, using nuanced text descriptions, or combining both. With computational costs steadily declining, implementing multimodal embeddings has become increasingly viable from a business perspective and would dramatically improve search capabilities. However, it requires addressing several interconnected technical challenges: validating and pre-processing input data, generating embeddings, storing embeddings, and querying stored embeddings. The following sections will break down each of these challenges in more detail.
 
 <figure>
-  <img src={diagram11.src} alt="four-step image search system workflow: 1\. validating and pre-processing, 2\. embedding generation, 3\. database storage, 4\. querying with text and image" />
-  <figcaption>four-step image search system workflow: 1\. validating and pre-processing, 2\. embedding generation, 3\. database storage, 4\. querying with text and image</figcaption>
+  <img
+    src={diagram11.src}
+    alt="Four-step image search system workflow: 1\. validating and pre-processing, 2\. embedding generation, 3\. database storage, 4\. querying with text and image"
+  />
+  <figcaption>
+    Four-step image search system workflow: 1\. validating and pre-processing,
+    2\. embedding generation, 3\. database storage, 4\. querying with text and
+    image
+  </figcaption>
 </figure>
 
 ## 1. Validating and Pre-processing
@@ -25,8 +33,15 @@ The first challenge is handling input data. Users send images in varying formats
 3. Images must be serialized for transmission over the network to an embedding model API. This serialization is typically accomplished through base64 encoding, which converts the binary image data into ASCII text characters that can be safely included as a string inside a JSON payload that the embedding model can process.
 
 <figure>
-  <img src={diagram12.src} alt="Two-stage image validation and pre-processing workflow: 1\. Validation (checking size and format), 2\. Transformation (resizing and base64 encoding)" />
-  <figcaption>Two-stage image validation and pre-processing workflow: 1\. Validation (checking size and format), 2\. Transformation (resizing and base64 encoding)</figcaption>
+  <img
+    src={diagram12.src}
+    alt="Two-stage image validation and pre-processing workflow: 1\. Validation (checking size and format), 2\. Transformation (resizing and base64 encoding)"
+  />
+  <figcaption>
+    Two-stage image validation and pre-processing workflow: 1\. Validation
+    (checking size and format), 2\. Transformation (resizing and base64
+    encoding)
+  </figcaption>
 </figure>
 
 ## 2. Embedding
@@ -36,7 +51,7 @@ Beyond pre-processing, the next critical decision lies in selecting the appropri
 Fewer options exist for multimodal capabilities than for text-only use cases. Models like OpenAI’s CLIP or Amazon’s Titan Multimodal G1 offer multimodal capabilities with different tradeoffs in speed, accuracy, hardware requirements, and licensing terms.
 
 <figure>
-  <img src={diagram13.src} alt=""/>
+  <img src={diagram13.src} alt="" />
   <figcaption></figcaption>
 </figure>
 
@@ -47,8 +62,15 @@ Developers must consider various deployment approaches for these models, from cl
 Once embeddings are generated, they must be stored in a way that enables efficient similarity search.
 
 <figure>
-  <img src={diagram14.src} alt="Vector embeddings can be stored in purpose-built vector databases (Pinecone, Weavite, Milvus) or traditional databases extended for vector functionality (PostgreSQL \+ pgvector)"/>
-  <figcaption>Vector embeddings can be stored in purpose-built vector databases (Pinecone, Weavite, Milvus) or traditional databases extended for vector functionality (PostgreSQL \+ pgvector)</figcaption>
+  <img
+    src={diagram14.src}
+    alt="Vector embeddings can be stored in purpose-built vector databases (Pinecone, Weavite, Milvus) or traditional databases extended for vector functionality (PostgreSQL \+ pgvector)"
+  />
+  <figcaption>
+    Vector embeddings can be stored in purpose-built vector databases (Pinecone,
+    Weavite, Milvus) or traditional databases extended for vector functionality
+    (PostgreSQL \+ pgvector)
+  </figcaption>
 </figure>
 
 Vector databases are a special class of database engineered specifically for the efficient storage and retrieval of embedding vectors.[^4] Developers typically choose between two primary approaches: purpose-built vector databases and traditional databases with vector extensions.
@@ -78,8 +100,15 @@ The vector database space offers numerous options, each with distinct advantages
 When a user submits a search, their input (which may be text, image URL, locally stored image, or a combination) must go through the same embedding process as the stored images before any comparison can happen. For text queries, this is straightforward. However, for image queries, users may provide images in different ways. While some users might have image URLs, a user searching for similar images is much more likely to have the query image stored locally on their device. This creates the additional challenge of handling image file uploads, which is discussed in greater depth below.
 
 <figure>
-  <img src={diagram15.src} alt="Query inputs (image and optional text description) are converted to an embedding, then compared against database embeddings to generate similarity scores"/>
-  <figcaption>Query inputs (image and optional text description) are converted to an embedding, then compared against database embeddings to generate similarity scores</figcaption>
+  <img
+    src={diagram15.src}
+    alt="Query inputs (image and optional text description) are converted to an embedding, then compared against database embeddings to generate similarity scores"
+  />
+  <figcaption>
+    Query inputs (image and optional text description) are converted to an
+    embedding, then compared against database embeddings to generate similarity
+    scores
+  </figcaption>
 </figure>
 
 Once embedded, the query embedding is compared against the database using a similarity metric. Most vector databases and libraries support common similarity metrics, including dot product, cosine similarity, and Euclidean distance. As mentioned, cosine similarity is particularly valuable for semantic search as it measures directional similarity regardless of vector magnitude.
@@ -91,8 +120,14 @@ Additionally, a production-grade system should ideally support the configuration
 This examination of a complete multimodal embedding system reveals that building one from scratch is a significant undertaking. While each function \- validation, processing, embedding, storage \- presents its technical challenges, additional complexity lies in connecting these components into a cohesive whole.
 
 <figure>
-  <img src={diagram16.src} alt="Complete multimodal embedding system: validation, pre-processing, embedding, and storage"/>
-  <figcaption>Complete multimodal embedding system: validation, pre-processing, embedding, and storage</figcaption>
+  <img
+    src={diagram16.src}
+    alt="Complete multimodal embedding system: validation, pre-processing, embedding, and storage"
+  />
+  <figcaption>
+    Complete multimodal embedding system: validation, pre-processing, embedding,
+    and storage
+  </figcaption>
 </figure>
 
 An "embedding pipeline" must feature error handling, retry mechanisms, and scalability to function reliably in production. While stitching together these components manually offers maximum flexibility, it quickly becomes time-consuming, error-prone, and difficult to scale and maintain.
