@@ -21,7 +21,7 @@ export default defineConfig({
         {
           icon: "github",
           label: "GitHub",
-          href: "https://github.com/UntitledCapstoneProj",
+          href: "https://github.com/Frame-Platform/Frame",
         },
         {
           icon: "linkedin",
