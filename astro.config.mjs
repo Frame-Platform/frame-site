@@ -9,6 +9,25 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Frame",
+      head: [
+        {
+          tag: "script",
+          attrs: {
+            async: true,
+            src: "https://www.googletagmanager.com/gtag/js?id=G-B1FNVBZ63Z",
+          },
+        },
+        {
+          tag: "script",
+          content: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-B1FNVBZ63Z');
+          `,
+        },
+      ],
       customCss: ["./src/styles/global.css"],
       logo: {
         src: "./src/assets/frame-logo.svg",
