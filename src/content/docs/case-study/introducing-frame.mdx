@@ -2,13 +2,25 @@
 title: Introducing Frame
 description: Introduction to Frame and demonstration videos of CLI, SDK and functionality
 ---
-import diagram17 from '../../../images/diagram17.png'
+
+import diagram17 from "../../../images/diagram17.png";
+import sdkImage from "/public/assets/frame-sdk.png";
+import cliGif from "/public/assets/frame-cli.gif";
+import searchByImage from "/public/assets/search-by-image.gif";
+import searchByText from "/public/assets/search-by-text.gif";
+import recommendations from "/public/assets/recommendations.gif";
 
 Frame was created to fill a gap in the market: a solution for developer teams that need image search capabilities but want a simple, easy-to-configure deployment without the complexity and overhead of existing enterprise-grade systems. Frame’s design trades features and configurability for simplicity, creating a pragmatic solution that handles the core functionality of an image embedding pipeline (discussed above) without unnecessary complexity.
 
 <figure>
-  <img src={diagram17.src} alt="A comparison of developers' options when selecting a vector search platform: Frame, Marqo, and Marqo Self-Hosted." />
-  <figcaption>A comparison of developers' options when selecting a vector search platform: Frame, Marqo, and Marqo Self-Hosted.</figcaption>
+  <img
+    src={diagram17.src}
+    alt="A comparison of developers' options when selecting a vector search platform: Frame, Marqo, and Marqo Self-Hosted."
+  />
+  <figcaption>
+    A comparison of developers' options when selecting a vector search platform:
+    Frame, Marqo, and Marqo Self-Hosted.
+  </figcaption>
 </figure>
 
 This means Frame isn’t optimized for systems requiring a highly performant enterprise solution or immediate searchability of newly uploaded content (the asynchronous ingestion pipeline means recently uploaded images may take a few moments to become searchable). Instead, Frame excels for teams:
@@ -21,3 +33,39 @@ This means Frame isn’t optimized for systems requiring a highly performant ent
 Frame is an open-source solution installed directly on the end user’s AWS account via AWS Cloud Development Kit (CDK) and a simple command line workflow. Once deployed, Frame abstracts away the entire embedding and search process behind a simple API. It supports search and recommendation, with minimal setup and a type-safe, developer-friendly Software Development Kit (SDK). With just a few lines of code, users can ingest data and query results, making sophisticated image search more widely accessible. The demonstration videos below show just how easy it is to get started.
 
 ## Demonstration
+
+### Infrastructure Deployment
+
+Watch how quickly you can deploy Frame's infrastructure with just a few commands. This streamlined setup process eliminates complex configuration, getting you from zero to fully deployed in minutes.
+
+<img src={cliGif} alt="CLI Screenshot" />
+
+Please refer to Frame's comprehensive [deployment documentation](/documentation/deployment/) for full step-by-step deployment instructions.
+
+### SDK Connection
+
+Connecting to your deployed Frame infrastructure is easy with the Frame TypeScript SDK.
+
+With just a few lines of code, establish a secure connection and access six intuitive methods which map directly to Frame's API endpoints.
+
+<img src={sdkImage} alt="SDK Screenshot" />
+
+Full SDK documentation is available [here](/documentation/sdk/).
+
+### Text-Based Search
+
+Detailed, multi-part text queries receive holistically relevant results because Frame's embedding technology captures semantic nuances that traditional keyword or manual labeling systems miss. This allows for naturally expressive search that thinks the way humans do.
+
+<img src={searchByText} alt="Search By Text" />
+
+### Image Search In Action
+
+Unlike basic visual matching, our system understands the complete context of images - including objects, relationships, environments, and implicit meanings.
+
+<img src={searchByImage} alt="Search By Image" />
+
+### Intelligent Recommendations
+
+Frame can be used to deliver highly relevant recommendations that truly capture the essence of the selected image. The system intelligently surfaces varied yet conceptually similar results—not just visually identical items—creating natural discovery paths that keep users engaged.
+
+<img src={recommendations} alt="Recommendations" />
