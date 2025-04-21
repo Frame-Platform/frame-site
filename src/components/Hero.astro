@@ -5,9 +5,9 @@
 <section class="hero">
   <div class="hero-container">
     <div class="hero-text">
-      <h1>Ingest Anything.<br />Query <span class="highlight">Everything.</span></h1>
+      <h1>Visual Search <br/>Infrastructure,<br/><span class="highlight">Simplified.</span><h1/>
       <p>
-        Build sophisticated image search without the complexity of vector embeddings, databases, and infrastructure.
+        Embed, search, and recommend visual content via a simple API deployed to your AWS account.
       </p>
       <div class="hero-buttons">
         <a class="primary-btn" href="/case-study/introduction">Case Study →</a>
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="hero-image">
-      <img src="/favicon.svg" alt="Frame logo" />
+      <img src="/assets/hero-img.svg" alt="Frame logo" />
     </div>
   </div>
 </section>
@@ -48,17 +48,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 1rem;
 }
 
 .hero-text {
-  flex: 1 1 500px;
+  margin-top: 0;
+  flex: 1 1 400px;
+  /* align-items: center; */
 }
 
 .hero-text h1 {
   font-size: var(--font-xxl, 3rem);
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: var(--sl-color-white);
 }
 
@@ -118,7 +119,7 @@
   min-width: 200px;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1000px) {
   .hero-container {
     flex-direction: column-reverse;
     text-align: center;
@@ -126,6 +127,10 @@
 
   .hero-buttons {
     justify-content: center;
+  }
+
+  .hero-text {
+    align-items: center;
   }
 }
 </style>
