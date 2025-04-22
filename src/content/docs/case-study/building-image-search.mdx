@@ -77,17 +77,17 @@ Vector databases are a special class of database engineered specifically for the
 
 1. Purpose-Built Vector Databases: Platforms like Weaviate, Milvus, and Pinecone are designed from the ground up specifically for vector operations. These specialized databases offer several advantages:
 
-- Optimized specifically for high-dimensional vector similarity search.
-- Support for multiple advanced indexing algorithms (HNSW, IVF, DiskANN, CAGRA).
-- Excel with massive vector collections requiring sub-millisecond query times.[^5]
+   1.1. Optimized specifically for high-dimensional vector similarity search.  
+   1.2. Support for multiple advanced indexing algorithms (HNSW, IVF, DiskANN, CAGRA).  
+   1.3. Excel with massive vector collections requiring sub-millisecond query times.[^5]
 
 2. Extended Traditional Databases: Established database systems have evolved to incorporate vector capabilities. For example, PostgreSQL provides a pgvector extension[^6] that allows organizations to integrate vector operations within a mature, battle-tested database engine. This traditional approach offers several advantages:
 
-- Maintains compatibility with existing ecosystems and tooling.
-- Preserves ACID compliance, transactions, and familiar SQL query patterns.[^7]
-- Enables storing vector data alongside conventional relational data.
-- Supports common indexing methods like HNSW and IVF (discussed in greater depth below).
-- Sufficient performance for most real-world applications.
+   2.1. Maintains compatibility with existing ecosystems and tooling.  
+   2.2. Preserves ACID compliance, transactions, and familiar SQL query patterns.[^7]  
+   2.3. Enables storing vector data alongside conventional relational data.  
+   2.4. Supports common indexing methods like HNSW and IVF (discussed in greater depth below).  
+   2.5. Sufficient performance for most real-world applications.
 
 Most vector databases offer K Nearest Neighbor (KNN) and Approximate Nearest Neighbor (ANN) search approaches. KNN compares the search vector against every vector stored in the database,[^8] guaranteeing perfect accuracy but at a high computational cost. ANN, by contrast, employs intelligent indexing algorithms like Hierarchical Navigable Small World (HNSW) and Inverted File Index (IVF) to dramatically reduce the search space, sacrificing some accuracy for response speed.
 
