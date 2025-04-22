@@ -45,15 +45,15 @@ To address the issue of unranked results, some companies implement systems that 
   </figcaption>
 </figure>
 
-One downside to this approach is known within recommendation systems as the ‘cold start’ problem \- when new images are added, they lack significant user data. Without this data, these images are unlikely to appear near the top of search results, creating a chicken-or-the-egg situation where users can’t discover new content because it hasn’t been previously discovered. This can significantly limit the visibility of newly added images, regardless of their potential relevance or quality.[^2]
+One downside to this approach is known within recommendation systems as the "cold start" problem \- when new images are added, they lack significant user data. Without this data, these images are unlikely to appear near the top of search results, creating a chicken-or-the-egg situation where users can’t discover new content because it hasn’t been previously discovered. This can significantly limit the visibility of newly added images, regardless of their potential relevance or quality.[^2]
 
 Both manual labeling and incorporating user behavior have fundamental limitations in how they represent images for search. Manual labeling captures only the explicitly tagged aspects, creating a sparse representation limited by vocabulary and time constraints. User behavior data, while valuable, only reflects how users have interacted with images they have already discovered, often leaving new content at a disadvantage regardless of relevance.
 
 ## Understanding Embeddings
 
-Instead of relying on manual labels or user behavior, what if software could actually _‘understand’_ the visual content of images? Neural networks and image embeddings now make this possible.
+Instead of relying on manual labels or user behavior, what if software could actually "understand" the visual content of images? Neural networks and image embeddings now make this possible.
 
-A neural network is a machine learning program or model that makes decisions that resemble how the human brain functions, using processes that imitate how biological neurons collaborate to identify patterns, evaluate options, and draw conclusions. In particular, neural networks can identify patterns in data (like objects in images or the semantic meaning of sentences) and recognize abstract qualities (like mood or style). This is possible because the network discovers patterns by analyzing millions of images during training. For example, a well-trained neural network can learn that certain combinations of color, lighting, and compositional elements evoke certain moods, identifying a vibrant Tokyo city scene as ‘energetic’.
+A neural network is a machine learning program or model that makes decisions that resemble how the human brain functions, using processes that imitate how biological neurons collaborate to identify patterns, evaluate options, and draw conclusions. In particular, neural networks can identify patterns in data (like objects in images or the semantic meaning of sentences) and recognize abstract qualities (like mood or style). This is possible because the network discovers patterns by analyzing millions of images during training. For example, a well-trained neural network can learn that certain combinations of color, lighting, and compositional elements evoke certain moods, identifying a vibrant Tokyo city scene as "energetic".
 
 <figure>
   <img
@@ -87,11 +87,11 @@ If a third number is added, a 3D vector (say, \[3, 4, 2\]) is created with an ad
 
 Each number represents a specific feature or aspect of the original data, capturing tangible features (objects, colors) and intangible qualities (mood, style). An embedding fundamentally acts as a digital fingerprint or blueprint that captures the key identifying elements of some unstructured data, including what it contains, how its compositional elements relate to each other, and the feeling it evokes.
 
-However, vector embeddings often exist in multiple dimensions (sometimes containing over 1,000 numbers), allowing them to be positioned in a ‘high-dimensional’ space. The numbers that make up the embedding are interpreted as coordinates within this high-dimensional space. While it's impossible to visualize a 1,024-dimensional space, the principle remains the same. Each embedding sits at a single point in this abstract high-dimensional space. That point is determined by the numbers that make up the embedding.
+However, vector embeddings often exist in multiple dimensions (sometimes containing over 1,000 numbers), allowing them to be positioned in a "high-dimensional" space. The numbers that make up the embedding are interpreted as coordinates within this high-dimensional space. While it's impossible to visualize a 1,024-dimensional space, the principle remains the same. Each embedding sits at a single point in this abstract high-dimensional space. That point is determined by the numbers that make up the embedding.
 
 This is important because images with similar visual characteristics (colors, shapes, objects, composition, etc.) end up positioned close to each other in this abstract, high-dimensional space. Mathematical techniques, like cosine similarity, can then be used to find images most similar to a reference image.
 
-Cosine similarity measures the similarity between embedding vectors by evaluating the angle between them in a high-dimensional embedding space. Instead of focusing on absolute value differences, it assesses how aligned the directions of the vectors are. A small angle indicates the embeddings point in nearly the same direction, suggesting they share similar features, while a larger angle reflects significant differences. This technique simplifies complex relationships in high-dimensional space into an intuitive metric for quantifying similarity and ranking the most similar results (known as ‘nearest neighbors’).
+Cosine similarity measures the similarity between embedding vectors by evaluating the angle between them in a high-dimensional embedding space. Instead of focusing on absolute value differences, it assesses how aligned the directions of the vectors are. A small angle indicates the embeddings point in nearly the same direction, suggesting they share similar features, while a larger angle reflects significant differences. This technique simplifies complex relationships in high-dimensional space into an intuitive metric for quantifying similarity and ranking the most similar results (known as "nearest neighbors").
 
 <figure>
   <img
@@ -126,11 +126,11 @@ Multimodal embeddings combine data types, such as text and images, into a unifie
 <figure>
   <img
     src={diagram9.src}
-    alt="Multimodal embedding comparison: similar vectors (‘Dog’ text and dog image) with a small angle versus different vectors (‘Gandalf’ text and dog image) with a large angle"
+    alt="Multimodal embedding comparison: similar vectors ('Dog' text and dog image) with a small angle versus different vectors ('pterodactyl' text and dog image) with a large angle"
   />
   <figcaption>
-    Multimodal embedding comparison: similar vectors (‘Dog’ text and dog image)
-    with a small angle versus different vectors (‘pterodactyl’ text and dog
+    Multimodal embedding comparison: similar vectors ("Dog" text and dog image)
+    with a small angle versus different vectors ("pterodactyl" text and dog
     image) with a large angle
   </figcaption>
 </figure>

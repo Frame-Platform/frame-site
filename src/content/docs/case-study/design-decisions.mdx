@@ -3,9 +3,9 @@ title: Design Decisions & Tradeoffs
 description: Three critical design decisions that shaped Frame's architecture
 ---
 
-import diagram27 from '../../../images/diagram27.png'
-import diagram28 from '../../../images/diagram28.png'
-import diagram29 from '../../../images/diagram29.png'
+import diagram27 from "../../../images/diagram27.png";
+import diagram28 from "../../../images/diagram28.png";
+import diagram29 from "../../../images/diagram29.png";
 
 Having explored Frame’s architecture, let’s examine the key design decisions that shaped its implementation.
 
@@ -16,8 +16,15 @@ A significant design decision was adopting the serverless computing model as the
 Serverless computing centers on Function-as-a-Service (FaaS), such as AWS Lambda. Lambda functions are triggered by specific events like HTTP requests. When a request occurs, AWS allocates the necessary resources (physical server(s)) to process the event and execute the function. If there are no incoming events, no servers are allocated, and when processing completes, any resources are released.
 
 <figure>
-  <img src={diagram27.src} alt="Serverless request handling patterns: idle state, automatic invocation for single requests, automatic scaling for multiple requests, and release when processing completes" />
-  <figcaption>Serverless request handling patterns: idle state, automatic invocation for single requests, automatic scaling for multiple requests, and release when processing completes</figcaption>
+  <img
+    src={diagram27.src}
+    alt="Serverless request handling patterns: idle state, automatic invocation for single requests, automatic scaling for multiple requests, and release when processing completes"
+  />
+  <figcaption>
+    Serverless request handling patterns: idle state, automatic invocation for
+    single requests, automatic scaling for multiple requests, and release when
+    processing completes
+  </figcaption>
 </figure>
 
 ### Why Serverless?
@@ -34,7 +41,7 @@ These benefits aligned with Frame’s goal of providing a simple, easily deploye
 
 No architectural decision comes without tradeoffs, and serverless is no exception:
 
-1. Cold Start Latency: After periods of inactivity, AWS needs to provision hardware when a new request arrives, creating a brief delay known as a ‘cold start’. While this delay is usually negligible for most applications, it can affect latency-sensitive use cases. It is important to note that this Lambda cold start problem is separate from the recommender system cold start problem referred to earlier in this case study.
+1. Cold Start Latency: After periods of inactivity, AWS needs to provision hardware when a new request arrives, creating a brief delay known as a "cold start". While this delay is usually negligible for most applications, it can affect latency-sensitive use cases. It is important to note that this Lambda cold start problem is separate from the recommender system cold start problem referred to earlier in this case study.
 2. Technical Resource Limitations: Memory and performance constraints of serverless functions impose strict limits on available memory, execution time, and CPU power. For Frame’s image processing needs, these limits are more than sufficient, but they might be restrictive for other specialized workloads.
 3. Limited Customization: Serverless environments provide fewer configuration options than traditional server deployments. While customizing runtime environments or implementing specialized libraries is more restricted, this simplicity has reduced operational complexity.
 
@@ -56,8 +63,15 @@ An SQS queue was placed between the API Lambda and Image Ingestion Lambda to ser
 ### Why SQS?
 
 <figure>
-  <img src={diagram28.src} alt="SQS automatic retries and error handling: If image processing fails, it is automatically retried. If it fails three times, it is redirected to a Dead Letter Queue for troubleshooting." />
-  <figcaption>SQS automatic retries and error handling: If image processing fails, it is automatically retried. If it fails three times, it is redirected to a Dead Letter Queue for troubleshooting.</figcaption>
+  <img
+    src={diagram28.src}
+    alt="SQS automatic retries and error handling: If image processing fails, it is automatically retried. If it fails three times, it is redirected to a Dead Letter Queue for troubleshooting."
+  />
+  <figcaption>
+    SQS automatic retries and error handling: If image processing fails, it is
+    automatically retried. If it fails three times, it is redirected to a Dead
+    Letter Queue for troubleshooting.
+  </figcaption>
 </figure>
 
 SQS offered several benefits that aligned perfectly with the image processing needs of Frame’s target users:
@@ -73,7 +87,7 @@ The decision to use SQS did come with some tradeoffs:
 
 1. Eventual Consistency: Images will be processed, but the system cannot guarantee exactly when. This means that, immediately after uploading, a search might not include the newly uploaded image.
 2. Message Size Limitations: SQS has a 256KB message size limit, requiring the use of image URLs rather than raw image data.
-3. At-Least-Once Delivery: Standard SQS queues provide an ‘at-least-once’ delivery guarantee, not ‘exactly-once’ delivery. This means that, in rare circumstances, the same image could be processed multiple times. To mitigate this, Frame includes idempotency checks when storing embeddings. If an image and description combination already exists in the database, a duplicate entry is not created. Instead, the existing entry is updated or the insertion is skipped completely, ensuring data consistency despite SQS' delivery semantics.
+3. At-Least-Once Delivery: Standard SQS queues provide an "at-least-once" delivery guarantee, not "exactly-once" delivery. This means that, in rare circumstances, the same image could be processed multiple times. To mitigate this, Frame includes idempotency checks when storing embeddings. If an image and description combination already exists in the database, a duplicate entry is not created. Instead, the existing entry is updated or the insertion is skipped completely, ensuring data consistency despite SQS' delivery semantics.
 
 ### Alternative: Step Functions
 
@@ -97,8 +111,15 @@ After evaluating several approaches, a solution was developed using Amazon S3 (A
 4. The temporary image is deleted from S3 after search completion.
 
 <figure>
-  <img src={diagram29.src} alt="Frame’s temporary S3 storage solution for search image file uploads: image stored in S3 (so the associated URL can be obtained) and deleted following search completion" />
-  <figcaption>Frame’s temporary S3 storage solution for search image file uploads: image stored in S3 (so the associated URL can be obtained) and deleted following search completion</figcaption>
+  <img
+    src={diagram29.src}
+    alt="Frame’s temporary S3 storage solution for search image file uploads: image stored in S3 (so the associated URL can be obtained) and deleted following search completion"
+  />
+  <figcaption>
+    Frame’s temporary S3 storage solution for search image file uploads: image
+    stored in S3 (so the associated URL can be obtained) and deleted following
+    search completion
+  </figcaption>
 </figure>
 
 ### Alternative: base64
