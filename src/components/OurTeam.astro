@@ -7,28 +7,32 @@ const team = [
     img: "/assets/chase.jpeg",
     location: "New London, CT",
     github: "https://github.com/cmphilpot",
-    linkedin: "https://www.linkedin.com/in/chase-philpot/"
+    linkedin: "https://www.linkedin.com/in/chase-philpot/",
+    resume: ""
   },
   {
     name: "Liam Turner",
     img: "/assets/liam3.png",
     location: "Yorkshire, UK",
     github: "https://github.com/LiamTurner347",
-    linkedin: "https://www.linkedin.com/in/liamturner347/"
+    linkedin: "https://www.linkedin.com/in/liamturner347/",
+    resume: ""
   },
   {
     name: "Mykel Murphy",
     img: "/assets/mykel.jpeg",
     location: "Gainesville, FL",
     github: "https://github.com/mykelkyle",
-    linkedin: "https://www.linkedin.com/in/mykel-murphy-7bb883179/"
+    linkedin: "https://www.linkedin.com/in/mykel-murphy-7bb883179/",
+    resume: "/assets/mykel-resume.pdf"
   },
   {
     name: "Ralph Delia",
     img: "/assets/ralph.jpeg",
     location: "New York, NY",
     github: "https://github.com/ralphdelia",
-    linkedin: "https://www.linkedin.com/in/ralph-delia-380194210/"
+    linkedin: "https://www.linkedin.com/in/ralph-delia-380194210/",
+    resume: ""
   },
 ];
 ---
@@ -119,7 +123,7 @@ const team = [
 <section class="team-section" id="our-team">
   <h2>Meet The <span class="highlight">Team</span></h2>
   <div class="team-grid">
-    {team.map(({ name, img, location, github, linkedin}) => (
+    {team.map(({ name, img, location, github, linkedin, resume}) => (
       <div class="team-member">
         <img src={img} alt="Team member"/>
         <h3>{name}</h3>
@@ -127,6 +131,7 @@ const team = [
         <div class="links">
           <a href={github}><Icon name="seti:github" size="1.5rem"/></a>
           <a href={linkedin}><Icon name="linkedin" size="1.5rem"/></a>
+          <a href={resume}><Icon name="document" size="1.5rem"/></a>
         </div>
       </div>
     ))}
