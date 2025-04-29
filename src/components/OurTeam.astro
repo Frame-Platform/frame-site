@@ -131,7 +131,9 @@ const team = [
         <div class="links">
           <a href={github}><Icon name="seti:github" size="1.5rem"/></a>
           <a href={linkedin}><Icon name="linkedin" size="1.5rem"/></a>
-          <a href={resume}><Icon name="document" size="1.5rem"/></a>
+          {resume && (
+            <a href={resume}><Icon name="document" size="1.5rem" /></a>
+          )}
         </div>
       </div>
     ))}
